@@ -14,7 +14,8 @@ import { cn } from '../lib/utils';
 const PROFILE_IMAGE = '/images/profile.png';
 
 const ROLE = 'Software Developer';
-Building scalable software solutions. '
+const HEADLINE_1 = 'Building scalable software solutions. ';
+const HEADLINE_2 = 'Engineering secure, high-performance applications.'; '
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 const BIO =
   "I'm Pitso Nkotolane, a Software Developer building scalable web applications, REST APIs, and AI-powered solutions. I've helped improve page load time by 40%, worked on systems serving 10K+ users, and achieved 85% automated test coverage.";
