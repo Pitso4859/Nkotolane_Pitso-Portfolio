@@ -46,7 +46,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="section-padding relative flex min-h-0 items-center overflow-x-hidden pt-28 sm:pt-32 lg:min-h-[80vh] lg:pt-32"
+      className="section-padding relative flex min-h-0 items-center overflow-visible pt-36 sm:pt-40"
     >
       {/* Animated background elements */}
       <div
@@ -62,7 +62,8 @@ const Hero = () => {
         className="pointer-events-none absolute bottom-0 left-1/4 h-[300px] w-[300px] rounded-full bg-gradient-to-r from-orange-500/10 to-pink-500/10 blur-[100px] animate-pulse"
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col-reverse items-center gap-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col-reverse items-center gap-10 px-4 lg:grid lg:grid-cols-2 lg:gap-16">
+        {/* Left Column - Text Content */}
         <div className="w-full min-w-0 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 px-4 py-1.5 mb-6 border border-indigo-200/20">
             <span className="relative flex h-2 w-2">
@@ -74,7 +75,7 @@ const Hero = () => {
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-zinc-700 dark:text-zinc-400">
             {ROLE}
           </p>
-          <h1 className="text-2xl font-bold leading-[1.15] tracking-tight text-zinc-950 dark:text-white sm:text-3xl md:text-4xl lg:text-6xl">
+          <h1 className="text-3xl font-bold leading-tight tracking-tight text-zinc-950 dark:text-white sm:text-4xl md:text-5xl lg:text-6xl">
             {streamActive && <span className="sr-only">{HEADLINE_FULL}</span>}
             <span aria-hidden={streamActive}>
               {streamActive ? headline1.displayed : HEADLINE_1}
@@ -84,31 +85,31 @@ const Hero = () => {
             </span>
             <StreamingCursor visible={headlineStreaming} />
           </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg mx-auto lg:mx-0">
             {BIO}
           </p>
           
-          {/* Stats Section */}
-          <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
+          {/* Stats Section - Updated grid */}
+          <div className="mt-8 grid grid-cols-2 gap-6 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
             <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">40%</p>
+              <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">40%</p>
               <p className="text-xs text-zinc-500 dark:text-zinc-500">Performance<br/>Improvement</p>
             </div>
             <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">10K+</p>
+              <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">10K+</p>
               <p className="text-xs text-zinc-500 dark:text-zinc-500">Users Served</p>
             </div>
             <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">85%</p>
+              <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">85%</p>
               <p className="text-xs text-zinc-500 dark:text-zinc-500">Test<br/>Coverage</p>
             </div>
             <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">11+</p>
+              <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">11+</p>
               <p className="text-xs text-zinc-500 dark:text-zinc-500">Certifications</p>
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
             <PrimaryButton
               href="#projects"
               onClick={(e) => handleSectionNavClick(e, 'projects')}
@@ -133,63 +134,71 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Circular Profile Image with Programming Icons */}
-        <div className="relative mt-4 flex w-full shrink-0 justify-center sm:mt-6 lg:mt-0 lg:justify-end">
-          <div className="relative">
-            {/* Outer ring animation */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-75 blur-md animate-pulse"></div>
-            
-            {/* Gradient border container */}
-            <div className="relative rounded-full p-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-              <div className="rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-800">
+        {/* Right Column - Circular Profile Image with Programming Icons */}
+        <div className="relative mt-6 flex w-full justify-center lg:justify-end">
+          <div className="relative p-8 sm:p-6">
+
+            {/* Glow */}
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-60 blur-2xl animate-pulse" />
+
+            {/* Gradient Ring */}
+            <div className="relative rounded-full p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+              <div className="overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <img
                   src={PROFILE_IMAGE}
-                  alt="Pitso Nkotolane, Software Developer"
-                  width={280}
-                  height={280}
+                  alt="Pitso Nkotolane"
+                  width={320}
+                  height={320}
                   fetchPriority="high"
                   decoding="async"
-                  className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover object-center rounded-full"
-                  style={{ aspectRatio: '1/1' }}
+                  className="
+                    w-48 h-48
+                    sm:w-64 sm:h-64
+                    md:w-72 md:h-72
+                    lg:w-80 lg:h-80
+                    rounded-full
+                    object-cover
+                    object-top
+                  "
                 />
               </div>
             </div>
-            
-            {/* Programming Icons around the image */}
-            {/* Java Icon - Top Right */}
-            <div className="absolute -top-6 -right-6 w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce z-10">
-              <FaJava className="w-5 h-5 text-white" />
+
+            {/* Java */}
+            <div className="absolute top-2 right-2 sm:-top-4 sm:-right-4 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-red-500 shadow-xl z-20">
+              <FaJava className="text-lg text-white sm:text-xl" />
             </div>
 
-            {/* Spring Boot Icon - Bottom Right */}
-            <div className="absolute -bottom-6 -right-6 w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-500 z-10">
-              <SiSpringboot className="w-5 h-5 text-white" />
+            {/* Spring */}
+            <div className="absolute bottom-2 right-2 sm:-bottom-4 sm:-right-4 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600 shadow-xl z-20">
+              <SiSpringboot className="text-lg text-white sm:text-xl" />
             </div>
 
-            {/* React Icon - Bottom Left */}
-            <div className="absolute -bottom-6 -left-6 w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-1000 z-10">
-              <SiReact className="w-5 h-5 text-white" />
+            {/* React */}
+            <div className="absolute bottom-2 left-2 sm:-bottom-4 sm:-left-4 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 shadow-xl z-20">
+              <SiReact className="text-lg text-white sm:text-xl" />
             </div>
 
-            {/* Node.js Icon - Top Left */}
-            <div className="absolute -top-6 -left-6 w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-700 z-10">
-              <SiNodedotjs className="w-5 h-5 text-white" />
+            {/* Node */}
+            <div className="absolute top-2 left-2 sm:-top-4 sm:-left-4 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-green-600 to-lime-600 shadow-xl z-20">
+              <SiNodedotjs className="text-lg text-white sm:text-xl" />
             </div>
 
-            {/* Python Icon - Top Center */}
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse z-10">
-              <FaPython className="w-5 h-5 text-white" />
+            {/* Python */}
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 shadow-xl z-20">
+              <FaPython className="text-lg text-white sm:text-xl" />
             </div>
 
-            {/* Database Icon - Right Center */}
-            <div className="absolute top-1/2 -right-8 transform -translate-y-1/2 w-9 h-9 rounded-full bg-gradient-to-br from-slate-500 to-gray-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-500 z-10">
-              <FaDatabase className="w-5 h-5 text-white" />
+            {/* Database */}
+            <div className="absolute top-1/2 -right-4 sm:-right-6 -translate-y-1/2 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-slate-500 to-gray-700 shadow-xl z-20">
+              <FaDatabase className="text-lg text-white sm:text-xl" />
             </div>
 
-            {/* Docker Icon - Left Center */}
-            <div className="absolute top-1/2 -left-8 transform -translate-y-1/2 w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-1000 z-10">
-              <FaDocker className="w-5 h-5 text-white" />
+            {/* Docker */}
+            <div className="absolute top-1/2 -left-4 sm:-left-6 -translate-y-1/2 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-700 shadow-xl z-20">
+              <FaDocker className="text-lg text-white sm:text-xl" />
             </div>
+
           </div>
         </div>
       </div>
