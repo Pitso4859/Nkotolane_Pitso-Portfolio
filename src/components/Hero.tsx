@@ -13,10 +13,8 @@ import { cn } from '../lib/utils';
 
 const PROFILE_IMAGE = '/images/profile.png';
 
-const ROLE = 'Software Engineer | Java, Springboot, React, MySQL 
-
-const HEADLINE_1 = 'Building scalable software solutions. ';
-const HEADLINE_2 = 'Engineering secure, high-performance applications.';
+const ROLE = 'Software Developer';
+Building scalable software solutions. '
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 const BIO =
   "I'm Pitso Nkotolane, a Software Developer building scalable web applications, REST APIs, and AI-powered solutions. I've helped improve page load time by 40%, worked on systems serving 10K+ users, and achieved 85% automated test coverage.";
@@ -146,8 +144,8 @@ const Hero = () => {
                 <img
                   src={PROFILE_IMAGE}
                   alt="Pitso Nkotolane, Software Developer"
-                  width={290}
-                  height={290}
+                  width={280}
+                  height={280}
                   fetchPriority="high"
                   decoding="async"
                   className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover object-center rounded-full"
@@ -158,7 +156,7 @@ const Hero = () => {
             
             {/* Programming Icons around the image */}
             {/* Java Icon - Top Right */}
-            <div className="absolute -top-1.2 -right-6 w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce z-10">
+            <div className="absolute -top-6 -right-6 w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce z-10">
               <FaJava className="w-5 h-5 text-white" />
             </div>
 
@@ -173,12 +171,12 @@ const Hero = () => {
             </div>
 
             {/* Node.js Icon - Top Left */}
-            <div className="absolute -top-1.2 -left-6 w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-700 z-10">
+            <div className="absolute -top-6 -left-6 w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-700 z-10">
               <SiNodedotjs className="w-5 h-5 text-white" />
             </div>
 
             {/* Python Icon - Top Center */}
-            <div className="absolute -top-1.2 left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse z-10">
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse z-10">
               <FaPython className="w-5 h-5 text-white" />
             </div>
 
