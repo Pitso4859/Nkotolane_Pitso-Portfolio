@@ -46,7 +46,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="section-padding relative flex min-h-0 items-center overflow-x-visible pt-28 sm:pt-32 lg:min-h-[80vh] lg:pt-32"
+      className="relative flex min-h-0 items-center overflow-visible pt-24 sm:pt-28 lg:min-h-[80vh] lg:pt-32"
     >
       {/* Animated background elements */}
       <div
@@ -62,135 +62,150 @@ const Hero = () => {
         className="pointer-events-none absolute bottom-0 left-1/4 h-[300px] w-[300px] rounded-full bg-gradient-to-r from-orange-500/10 to-pink-500/10 blur-[100px] animate-pulse"
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-8 lg:grid lg:grid-cols-2 lg:gap-12">
-        {/* Left Column - Text Content */}
-        <div className="w-full min-w-0 text-center lg:text-left order-2 lg:order-1">
-          <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 px-4 py-1.5 mb-6 border border-indigo-200/20">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400">Available for opportunities</span>
-          </div>
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-zinc-700 dark:text-zinc-400">
-            {ROLE}
-          </p>
-          <h1 className="text-2xl font-bold leading-[1.15] tracking-tight text-zinc-950 dark:text-white sm:text-3xl md:text-4xl lg:text-6xl">
-            {streamActive && <span className="sr-only">{HEADLINE_FULL}</span>}
-            <span aria-hidden={streamActive}>
-              {streamActive ? headline1.displayed : HEADLINE_1}
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                {streamActive ? headline2.displayed : HEADLINE_2}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+          {/* Left Column - Text Content */}
+          <div className="w-full text-center lg:text-left order-2 lg:order-1">
+            <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 px-4 py-1.5 mb-6 border border-indigo-200/20">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-            </span>
-            <StreamingCursor visible={headlineStreaming} />
-          </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg mx-auto lg:mx-0">
-            {BIO}
-          </p>
-          
-          {/* Stats Section */}
-          <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
-            <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">40%</p>
-              <p className="text-xs text-zinc-500 dark:text-zinc-500">Performance<br/>Improvement</p>
+              <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400">Available for opportunities</span>
             </div>
-            <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">10K+</p>
-              <p className="text-xs text-zinc-500 dark:text-zinc-500">Users Served</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">85%</p>
-              <p className="text-xs text-zinc-500 dark:text-zinc-500">Test<br/>Coverage</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">11+</p>
-              <p className="text-xs text-zinc-500 dark:text-zinc-500">Certifications</p>
-            </div>
-          </div>
-
-          <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
-            <PrimaryButton
-              href="#projects"
-              onClick={(e) => handleSectionNavClick(e, 'projects')}
-            >
-              View Projects
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </PrimaryButton>
-            <a
-              href="#booking-section"
-              className={cn(secondaryButton, 'px-6 py-[12px] text-sm')}
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById('booking-section');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              <Calendar className="h-4 w-4 mr-1" />
-              Book a Call
-            </a>
-          </div>
-        </div>
-
-        {/* Right Column - Profile Image with Icons (Desktop only for icons) */}
-        <div className="relative flex w-full items-center justify-center order-1 lg:order-2 mb-6 lg:mb-0">
-          <div className="relative">
-            {/* Outer ring animation */}
-            <div className="absolute -inset-3 sm:-inset-4 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-75 blur-md animate-pulse"></div>
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-zinc-700 dark:text-zinc-400">
+              {ROLE}
+            </p>
+            <h1 className="text-2xl font-bold leading-[1.15] tracking-tight text-zinc-950 dark:text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+              {streamActive && <span className="sr-only">{HEADLINE_FULL}</span>}
+              <span aria-hidden={streamActive}>
+                {streamActive ? headline1.displayed : HEADLINE_1}
+                <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  {streamActive ? headline2.displayed : HEADLINE_2}
+                </span>
+              </span>
+              <StreamingCursor visible={headlineStreaming} />
+            </h1>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg mx-auto lg:mx-0">
+              {BIO}
+            </p>
             
-            {/* Gradient border container */}
-            <div className="relative rounded-full p-[2px] sm:p-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-              <div className="rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-800">
-                <img
-                  src={PROFILE_IMAGE}
-                  alt="Pitso Nkotolane, Software Developer"
-                  width={280}
-                  height={280}
-                  fetchPriority="high"
-                  decoding="async"
-                  className="w-40 h-40 xs:w-48 xs:h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover object-center rounded-full"
-                  style={{ aspectRatio: '1/1' }}
-                />
+            {/* Stats Section */}
+            <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
+              <div className="text-center">
+                <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">40%</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500">Performance<br/>Improvement</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">10K+</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500">Users Served</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">85%</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500">Test<br/>Coverage</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">11+</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500">Certifications</p>
               </div>
             </div>
-            
-            {/* Programming Icons - Only visible on desktop (sm and up) */}
-            <div className="hidden sm:block">
+
+            <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
+              <PrimaryButton
+                href="#projects"
+                onClick={(e) => handleSectionNavClick(e, 'projects')}
+              >
+                View Projects
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </PrimaryButton>
+              <a
+                href="#booking-section"
+                className={cn(secondaryButton, 'px-6 py-[12px] text-sm')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('booking-section');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <Calendar className="h-4 w-4 mr-1" />
+                Book a Call
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column - Circular Profile Image with All Icons */}
+          <div className="relative flex w-full items-center justify-center order-1 lg:order-2 mt-4 sm:mt-6 lg:mt-0">
+            <div className="relative">
+              {/* Outer ring animation */}
+              <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-75 blur-md animate-pulse"></div>
+              
+              {/* Gradient border container */}
+              <div className="relative rounded-full p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                <div className="rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-800">
+                  <img
+                    src={PROFILE_IMAGE}
+                    alt="Pitso Nkotolane, Software Developer"
+                    width={280}
+                    height={280}
+                    fetchPriority="high"
+                    decoding="async"
+                    className="w-36 h-36 xs:w-44 xs:h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64 object-cover object-center rounded-full"
+                    style={{ aspectRatio: '1/1' }}
+                  />
+                </div>
+              </div>
+              
+              {/* All Programming Icons - Responsive sizes for all devices */}
+              
               {/* Java Icon - Top Right */}
-              <div className="absolute -top-5 -right-5 sm:-top-6 sm:-right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce z-10">
-                <FaJava className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <div className="absolute -top-3 -right-3 xs:-top-4 xs:-right-4 sm:-top-5 sm:-right-5 md:-top-6 md:-right-6">
+                <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce z-10">
+                  <FaJava className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
+                </div>
               </div>
 
               {/* Spring Boot Icon - Bottom Right */}
-              <div className="absolute -bottom-5 -right-5 sm:-bottom-6 sm:-right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-500 z-10">
-                <SiSpringboot className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <div className="absolute -bottom-3 -right-3 xs:-bottom-4 xs:-right-4 sm:-bottom-5 sm:-right-5 md:-bottom-6 md:-right-6">
+                <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-500 z-10">
+                  <SiSpringboot className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
+                </div>
               </div>
 
               {/* React Icon - Bottom Left */}
-              <div className="absolute -bottom-5 -left-5 sm:-bottom-6 sm:-left-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-1000 z-10">
-                <SiReact className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <div className="absolute -bottom-3 -left-3 xs:-bottom-4 xs:-left-4 sm:-bottom-5 sm:-left-5 md:-bottom-6 md:-left-6">
+                <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-1000 z-10">
+                  <SiReact className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
+                </div>
               </div>
 
               {/* Node.js Icon - Top Left */}
-              <div className="absolute -top-5 -left-5 sm:-top-6 sm:-left-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-700 z-10">
-                <SiNodedotjs className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <div className="absolute -top-3 -left-3 xs:-top-4 xs:-left-4 sm:-top-5 sm:-left-5 md:-top-6 md:-left-6">
+                <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-700 z-10">
+                  <SiNodedotjs className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
+                </div>
               </div>
 
               {/* Python Icon - Top Center */}
-              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 sm:-top-8 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse z-10">
-                <FaPython className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" />
+              <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 xs:-top-6 sm:-top-7 md:-top-8">
+                <div className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse z-10">
+                  <FaPython className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                </div>
               </div>
 
               {/* Database Icon - Right Center */}
-              <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 sm:-right-8 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-slate-500 to-gray-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-500 z-10">
-                <FaDatabase className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" />
+              <div className="absolute top-1/2 -right-4 transform -translate-y-1/2 xs:-right-5 sm:-right-6 md:-right-7">
+                <div className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-slate-500 to-gray-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-500 z-10">
+                  <FaDatabase className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                </div>
               </div>
 
               {/* Docker Icon - Left Center */}
-              <div className="absolute top-1/2 -left-6 transform -translate-y-1/2 sm:-left-8 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-1000 z-10">
-                <FaDocker className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" />
+              <div className="absolute top-1/2 -left-4 transform -translate-y-1/2 xs:-left-5 sm:-left-6 md:-left-7">
+                <div className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-1000 z-10">
+                  <FaDocker className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                </div>
               </div>
             </div>
           </div>
