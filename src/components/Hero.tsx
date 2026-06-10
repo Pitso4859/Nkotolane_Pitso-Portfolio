@@ -135,11 +135,11 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Column - Circular Profile Image with All Icons - LARGER IMAGE */}
+          {/* Right Column - Circular Profile Image - LARGER SIZE */}
           <div className="relative flex w-full items-center justify-center order-1 lg:order-2 mt-4 sm:mt-6 lg:mt-0">
             <div className="relative">
               {/* Outer ring animation - Larger ring */}
-              <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-75 blur-md animate-pulse"></div>
+              <div className="absolute -inset-5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-75 blur-md animate-pulse"></div>
               
               {/* Gradient border container */}
               <div className="relative rounded-full p-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -147,64 +147,64 @@ const Hero = () => {
                   <img
                     src={PROFILE_IMAGE}
                     alt="Pitso Nkotolane, Software Developer"
-                    width={320}
-                    height={320}
+                    width={360}
+                    height={360}
                     fetchPriority="high"
                     decoding="async"
-                    className="w-44 h-44 xs:w-52 xs:h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 lg:w-72 lg:h-72 object-cover object-center rounded-full"
+                    className="w-52 h-52 xs:w-60 xs:h-60 sm:w-68 sm:h-68 md:w-76 md:h-76 lg:w-80 lg:h-80 xl:w-84 xl:h-84 object-cover object-center rounded-full"
                     style={{ aspectRatio: '1/1' }}
                   />
                 </div>
               </div>
               
-              {/* All Programming Icons - Responsive sizes for all devices */}
+              {/* All Programming Icons - Larger to match image */}
               
               {/* Java Icon - Top Right */}
               <div className="absolute -top-3 -right-3 xs:-top-4 xs:-right-4 sm:-top-5 sm:-right-5 md:-top-6 md:-right-6">
-                <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce z-10">
-                  <FaJava className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 text-white" />
+                <div className="w-9 h-9 xs:w-10 xs:h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce z-10">
+                  <FaJava className="w-4.5 h-4.5 xs:w-5 xs:h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-white" />
                 </div>
               </div>
 
               {/* Spring Boot Icon - Bottom Right */}
               <div className="absolute -bottom-3 -right-3 xs:-bottom-4 xs:-right-4 sm:-bottom-5 sm:-right-5 md:-bottom-6 md:-right-6">
-                <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-500 z-10">
-                  <SiSpringboot className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 text-white" />
+                <div className="w-9 h-9 xs:w-10 xs:h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-500 z-10">
+                  <SiSpringboot className="w-4.5 h-4.5 xs:w-5 xs:h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-white" />
                 </div>
               </div>
 
               {/* React Icon - Bottom Left */}
               <div className="absolute -bottom-3 -left-3 xs:-bottom-4 xs:-left-4 sm:-bottom-5 sm:-left-5 md:-bottom-6 md:-left-6">
-                <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-1000 z-10">
-                  <SiReact className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 text-white" />
+                <div className="w-9 h-9 xs:w-10 xs:h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-1000 z-10">
+                  <SiReact className="w-4.5 h-4.5 xs:w-5 xs:h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-white" />
                 </div>
               </div>
 
               {/* Node.js Icon - Top Left */}
               <div className="absolute -top-3 -left-3 xs:-top-4 xs:-left-4 sm:-top-5 sm:-left-5 md:-top-6 md:-left-6">
-                <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-700 z-10">
-                  <SiNodedotjs className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 text-white" />
+                <div className="w-9 h-9 xs:w-10 xs:h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center shadow-lg animate-bounce animation-delay-700 z-10">
+                  <SiNodedotjs className="w-4.5 h-4.5 xs:w-5 xs:h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-white" />
                 </div>
               </div>
 
               {/* Python Icon - Top Center */}
-              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 xs:-top-7 sm:-top-8 md:-top-9">
-                <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse z-10">
-                  <FaPython className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
+              <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 xs:-top-8 sm:-top-9 md:-top-10">
+                <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse z-10">
+                  <FaPython className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 text-white" />
                 </div>
               </div>
 
               {/* Database Icon - Right Center */}
-              <div className="absolute top-1/2 -right-5 transform -translate-y-1/2 xs:-right-6 sm:-right-7 md:-right-8">
-                <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-slate-500 to-gray-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-500 z-10">
-                  <FaDatabase className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
+              <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 xs:-right-7 sm:-right-8 md:-right-9">
+                <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-slate-500 to-gray-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-500 z-10">
+                  <FaDatabase className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 text-white" />
                 </div>
               </div>
 
               {/* Docker Icon - Left Center */}
-              <div className="absolute top-1/2 -left-5 transform -translate-y-1/2 xs:-left-6 sm:-left-7 md:-left-8">
-                <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-1000 z-10">
-                  <FaDocker className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
+              <div className="absolute top-1/2 -left-6 transform -translate-y-1/2 xs:-left-7 sm:-left-8 md:-left-9">
+                <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-lg animate-pulse animation-delay-1000 z-10">
+                  <FaDocker className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 text-white" />
                 </div>
               </div>
             </div>
