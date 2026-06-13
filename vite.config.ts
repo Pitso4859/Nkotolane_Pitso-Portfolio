@@ -11,10 +11,19 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-icons': ['react-icons'],
+        // Provide a function to satisfy Rollup's ManualChunksFunction type
+        manualChunks(id) {
+          if (!id) return null;
+          if (id.includes('/node_modules/react') || id.includes('/node_modules/react-dom')) {
+            return 'vendor-react';
+          }
+          if (id.includes('/node_modules/framer-motion')) {
+            return 'vendor-motion';
+          }
+          if (id.includes('/node_modules/react-icons')) {
+            return 'vendor-icons';
+          }
+          return null;
         },
       },
     },
