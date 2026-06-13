@@ -6,6 +6,22 @@ import { sendBookingEmails } from '../services/emailService';
 
 type BookingType = 'call' | 'meeting' | 'mentorship';
 
+// Timezone list with UTC offsets
+const TIMEZONES = [
+  { value: 'Africa/Johannesburg', label: 'South Africa (GMT+2)', offset: '+02:00' },
+  { value: 'America/New_York', label: 'USA - Eastern Time (GMT-4)', offset: '-04:00' },
+  { value: 'America/Los_Angeles', label: 'USA - Pacific Time (GMT-7)', offset: '-07:00' },
+  { value: 'Europe/London', label: 'United Kingdom (GMT+1)', offset: '+01:00' },
+  { value: 'Europe/Paris', label: 'Central Europe (GMT+2)', offset: '+02:00' },
+  { value: 'Asia/Dubai', label: 'UAE / Dubai (GMT+4)', offset: '+04:00' },
+  { value: 'Asia/Shanghai', label: 'China (GMT+8)', offset: '+08:00' },
+  { value: 'Asia/Tokyo', label: 'Japan (GMT+9)', offset: '+09:00' },
+  { value: 'Asia/Singapore', label: 'Singapore (GMT+8)', offset: '+08:00' },
+  { value: 'Australia/Sydney', label: 'Australia (GMT+10)', offset: '+10:00' },
+  { value: 'Pacific/Auckland', label: 'New Zealand (GMT+12)', offset: '+12:00' },
+  { value: 'Asia/Kolkata', label: 'India (GMT+5:30)', offset: '+05:30' },
+];
+
 const Booking = () => {
   const [selectedType, setSelectedType] = useState<BookingType>('meeting');
   const [selectedDuration, setSelectedDuration] = useState('30');
@@ -16,6 +32,7 @@ const Booking = () => {
   const [showForm, setShowForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [selectedTimezone, setSelectedTimezone] = useState(TIMEZONES[0].value); // Default to South Africa
 
   const bookingOptions = [
     {
@@ -41,6 +58,46 @@ const Booking = () => {
     }
   ];
 
+  // Helper: Check if a date is today
+  const isToday = (date: Date): boolean => {
+    const today = new Date();
+    return date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+  };
+
+  // Helper: Check if a date is in the past
+  const isPastDate = (year: number, month: number, day: number): boolean => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const checkDate = new Date(year, month, day);
+    checkDate.setHours(0, 0, 0, 0);
+    return checkDate < today;
+  };
+
+  // Get available time slots (only future times for today)
+  const getAvailableTimeSlots = (date: Date | null): string[] => {
+    const allTimeSlots = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'];
+    
+    if (!date) return allTimeSlots;
+    
+    const now = new Date();
+    const isSelectedDateToday = isToday(date);
+    
+    if (!isSelectedDateToday) return allTimeSlots;
+    
+    // Filter out past times for today
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    
+    return allTimeSlots.filter(timeSlot => {
+      const [hour, minute] = timeSlot.split(':').map(Number);
+      if (hour > currentHour) return true;
+      if (hour === currentHour && minute > currentMinute) return true;
+      return false;
+    });
+  };
+
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -61,9 +118,16 @@ const Booking = () => {
 
   const days = getDaysInMonth(currentMonth);
   const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-  const timeSlots = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'];
+  const availableTimeSlots = getAvailableTimeSlots(selectedDate);
+
+  // Check if a day is selectable (not in the past)
+  const isDaySelectable = (day: number): boolean => {
+    return !isPastDate(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+  };
 
   const handleDateSelect = (day: number) => {
+    if (!isDaySelectable(day)) return;
+    
     setSelectedDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day));
     setSelectedTime(null);
     setShowForm(false);
@@ -101,6 +165,9 @@ const Booking = () => {
       setIsSubmitting(true);
       setSubmitStatus(null);
       
+      // Get timezone label
+      const timezone = TIMEZONES.find(tz => tz.value === selectedTimezone);
+      
       const bookingData = {
         name: name,
         email: email,
@@ -110,6 +177,7 @@ const Booking = () => {
         platform: selectedPlatform,
         date: selectedDate,
         time: selectedTime,
+        timezone: timezone?.label || 'South Africa (GMT+2)',
       };
       
       try {
@@ -235,18 +303,42 @@ const Booking = () => {
           </div>
         </div>
 
+        {/* Timezone Selector */}
+        <div className="mb-3">
+          <select
+            value={selectedTimezone}
+            onChange={(e) => setSelectedTimezone(e.target.value)}
+            className="w-full rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 text-xs text-zinc-700 dark:text-zinc-300 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          >
+            {TIMEZONES.map((tz) => (
+              <option key={tz.value} value={tz.value}>
+                {tz.label}
+              </option>
+            ))}
+          </select>
+          <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 text-center">
+            Your current timezone — meeting times will be converted to South Africa time (GMT+2)
+          </p>
+        </div>
+
         {/* Calendar - Compact like reference */}
         <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-sm">
           
           {/* Month header */}
           <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-100 dark:border-zinc-800">
-            <button onClick={prevMonth} className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded text-sm">
+            <button 
+              onClick={prevMonth} 
+              className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded text-sm"
+            >
               ←
             </button>
             <span className="text-sm font-medium text-zinc-900 dark:text-white">
               {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
             </span>
-            <button onClick={nextMonth} className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded text-sm">
+            <button 
+              onClick={nextMonth} 
+              className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded text-sm"
+            >
               →
             </button>
           </div>
@@ -262,24 +354,33 @@ const Booking = () => {
 
           {/* Days */}
           <div className="grid grid-cols-7 gap-0.5 px-2 pb-2">
-            {days.map((day, index) => (
-              <button
-                key={index}
-                onClick={() => day && handleDateSelect(day)}
-                disabled={!day}
-                className={cn(
-                  'h-8 w-full text-xs font-medium rounded-md transition-all',
-                  day && 'hover:bg-indigo-50 dark:hover:bg-indigo-900/30 cursor-pointer',
-                  selectedDate?.getDate() === day && selectedDate?.getMonth() === currentMonth.getMonth()
-                    ? 'bg-indigo-600 text-white'
-                    : day
-                    ? 'text-zinc-900 dark:text-white'
-                    : 'text-zinc-300 dark:text-zinc-700 cursor-default'
-                )}
-              >
-                {day || ''}
-              </button>
-            ))}
+            {days.map((day, index) => {
+              const isSelectable = day !== null && isDaySelectable(day);
+              const isSelected = selectedDate?.getDate() === day && 
+                selectedDate?.getMonth() === currentMonth.getMonth() &&
+                selectedDate?.getFullYear() === currentMonth.getFullYear();
+              
+              return (
+                <button
+                  key={index}
+                  onClick={() => day !== null && isSelectable && handleDateSelect(day)}
+                  disabled={!day || !isSelectable}
+                  className={cn(
+                    'h-8 w-full text-xs font-medium rounded-md transition-all',
+                    day && isSelectable && 'hover:bg-indigo-50 dark:hover:bg-indigo-900/30 cursor-pointer',
+                    isSelected
+                      ? 'bg-indigo-600 text-white'
+                      : day && isSelectable
+                      ? 'text-zinc-900 dark:text-white'
+                      : day && !isSelectable
+                      ? 'text-zinc-300 dark:text-zinc-700 line-through cursor-not-allowed'
+                      : 'text-zinc-300 dark:text-zinc-700 cursor-default'
+                  )}
+                >
+                  {day || ''}
+                </button>
+              );
+            })}
           </div>
 
           {/* Status Message */}
@@ -299,17 +400,26 @@ const Booking = () => {
             <div className="border-t border-zinc-100 dark:border-zinc-800 px-3 py-2">
               <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mb-1.5">
                 {selectedDate.toLocaleDateString('default', { month: 'short', day: 'numeric' })}
+                {isToday(selectedDate) && (
+                  <span className="ml-1 text-indigo-600 dark:text-indigo-400">(Today)</span>
+                )}
               </p>
               <div className="flex flex-wrap gap-1">
-                {timeSlots.map(time => (
-                  <button
-                    key={time}
-                    onClick={() => handleTimeSelect(time)}
-                    className="px-2 py-0.5 rounded-md border border-zinc-200 dark:border-zinc-700 text-[10px] hover:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
-                  >
-                    {time}
-                  </button>
-                ))}
+                {availableTimeSlots.length > 0 ? (
+                  availableTimeSlots.map(time => (
+                    <button
+                      key={time}
+                      onClick={() => handleTimeSelect(time)}
+                      className="px-2 py-0.5 rounded-md border border-zinc-200 dark:border-zinc-700 text-[10px] hover:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                    >
+                      {time}
+                    </button>
+                  ))
+                ) : (
+                  <p className="text-[10px] text-zinc-400 py-1">
+                    No available times for today. Please select another date.
+                  </p>
+                )}
               </div>
             </div>
           )}
@@ -321,6 +431,9 @@ const Booking = () => {
                 <div>
                   <p className="text-xs font-medium text-zinc-900 dark:text-white">
                     {selectedDate.toLocaleDateString('default', { month: 'short', day: 'numeric' })} at {selectedTime}
+                  </p>
+                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400">
+                    {TIMEZONES.find(tz => tz.value === selectedTimezone)?.label}
                   </p>
                 </div>
                 <button

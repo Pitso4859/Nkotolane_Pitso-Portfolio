@@ -44,7 +44,7 @@
     "terser": "^5.48.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.5"
+    "vite": "^8.0.16"
   },
   "overrides": {
     "glob": "^11.0.0"

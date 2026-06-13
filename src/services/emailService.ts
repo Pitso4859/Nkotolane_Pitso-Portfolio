@@ -1,7 +1,6 @@
 // src/services/emailService.ts
 import emailjs from '@emailjs/browser';
 
-
 const PUBLIC_KEY        = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const SERVICE_ID        = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const USER_TEMPLATE_ID  = import.meta.env.VITE_EMAILJS_BOOKING_TEMPLATE;
@@ -16,6 +15,7 @@ interface BookingDetails {
   date: Date;
   time: string;
   message?: string;
+  timezone?: string;  // Added timezone field
 }
 
 export async function sendBookingEmails(booking: BookingDetails): Promise<boolean> {
@@ -27,6 +27,7 @@ export async function sendBookingEmails(booking: BookingDetails): Promise<boolea
   });
 
   const platformLabel = booking.platform === 'google' ? 'Google Meet' : 'Microsoft Teams';
+  const timezoneInfo = booking.timezone || 'South Africa (GMT+2)';
 
   const userMessage = booking.message?.trim()
     ? booking.message.trim()
@@ -36,7 +37,7 @@ export async function sendBookingEmails(booking: BookingDetails): Promise<boolea
     ? booking.message.trim()
     : 'No additional message provided.';
 
-  // USER confirmation — "To Email" in EmailJS = {{email}}
+  // USER confirmation
   const userParams = {
     email:        booking.email,
     to_name:      booking.name,
@@ -45,10 +46,11 @@ export async function sendBookingEmails(booking: BookingDetails): Promise<boolea
     platform:     platformLabel,
     date:         dateStr,
     time:         booking.time,
+    timezone:     timezoneInfo,
     message:      userMessage,
   };
 
-  // ADMIN notification — "Reply To" in EmailJS = {{email}}
+  // ADMIN notification
   const adminParams = {
     email:        booking.email,
     from_name:    booking.name,
@@ -58,6 +60,7 @@ export async function sendBookingEmails(booking: BookingDetails): Promise<boolea
     platform:     platformLabel,
     date:         dateStr,
     time:         booking.time,
+    timezone:     timezoneInfo,
     message:      adminMessage,
   };
 
@@ -65,14 +68,14 @@ export async function sendBookingEmails(booking: BookingDetails): Promise<boolea
     emailjs.init(PUBLIC_KEY);
 
     const userResult  = await emailjs.send(SERVICE_ID, USER_TEMPLATE_ID,  userParams);
-    console.log('Confirmation sent to user: - emailService.ts:68', booking.email, userResult.status);
+    console.log('Confirmation sent to user: - emailService.ts:71', booking.email, userResult.status);
 
     const adminResult = await emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, adminParams);
-    console.log('Notification sent to admin: - emailService.ts:71', adminResult.status);
+    console.log('Notification sent to admin: - emailService.ts:74', adminResult.status);
 
     return true;
   } catch (error) {
-    console.error('EmailJS error: - emailService.ts:75', error);
+    console.error('EmailJS error: - emailService.ts:78', error);
     return false;
   }
 }
