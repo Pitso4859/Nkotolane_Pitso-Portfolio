@@ -15,8 +15,8 @@ const experiences: ExperienceEntry[] = [
   {
     type: 'work',
     title: 'Software Developer',
-    company: 'Current Role',
-    period: '2024 - Present',
+    company: 'O2M8-2-AI',
+    period: 'Jan 2026 - Present',
     badge: 'Current',
     description: [
       'Improved page load time by 40% through optimization techniques',
@@ -29,8 +29,8 @@ const experiences: ExperienceEntry[] = [
   {
     type: 'education',
     title: 'Advanced Diploma in Information Technology',
-    company: 'Tshwane University of Technology (TUT)',
-    period: '2025 - 2026',
+    company: 'Vaal University of Technology (VUT)',
+    period: 'In progress - Expected ( April 2027 )',
     description: [
       'Advanced software development and system design',
       'Enterprise application architecture',
@@ -40,8 +40,8 @@ const experiences: ExperienceEntry[] = [
   {
     type: 'education',
     title: 'Diploma in Information Technology',
-    company: 'Tshwane University of Technology (TUT)',
-    period: '2021 - 2025',
+    company: 'Vaal University of Technology (VUT)',
+    period: '2023 - 2025',
     description: [
       'Full-stack development with Java, Spring Boot, and React',
       'Database design and management with MySQL and PostgreSQL',

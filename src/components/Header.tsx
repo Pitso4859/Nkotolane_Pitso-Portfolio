@@ -12,6 +12,7 @@ const navItems = [
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'certificates', label: 'Certificates' },
+  { id: 'contact', label: 'Contact' },
 ] as const;
 
 const Header = () => {
@@ -63,7 +64,11 @@ const Header = () => {
 
   const updateSectionHash = (id: string) => {
     if (typeof window !== 'undefined' && window.history.replaceState) {
-      window.history.replaceState(null, '', `#${id}`);
+      if (id === 'home') {
+        window.history.replaceState(null, '', '/');
+      } else {
+        window.history.replaceState(null, '', `#${id}`);
+      }
     }
   };
 

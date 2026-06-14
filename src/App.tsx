@@ -11,6 +11,7 @@ import Experience from './components/Experience';
 import Certificates from './components/Certificates';
 import Booking from './components/Booking';
 import Footer from './components/Footer';
+import Contact from './components/Contact';
 import { handleInitialHash, scrollToSectionWithRetry, checkSectionsExist } from './lib/scroll';
 import { setupDebugTools } from './lib/debug';
 import './App.css';
@@ -76,6 +77,7 @@ function App() {
           <Projects />
           <Experience />
           <Certificates />
+          <Contact />
           <Booking />
         </main>
         <Footer />
