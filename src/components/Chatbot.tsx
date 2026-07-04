@@ -404,13 +404,13 @@ const Chatbot = () => {
       <div
         className={cn(
           'fixed bottom-24 right-6 z-50 flex flex-col',
-          'w-[calc(100vw-3rem)] max-w-[380px]',
+          'w-[calc(100vw-3rem)] max-w-[380px] sm:max-w-[400px]',
           'rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700',
           'bg-white dark:bg-zinc-900 shadow-2xl',
           'transition-all duration-300 origin-bottom-right',
           isOpen ? 'scale-100 opacity-100 pointer-events-auto' : 'scale-90 opacity-0 pointer-events-none'
         )}
-        style={{ height: '580px' }}
+        style={{ height: 'min(580px, calc(100vh - 7rem))', maxHeight: 'calc(100dvh - 7rem)' }}
       >
         {/* Header */}
         <div className="flex shrink-0 items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3">
