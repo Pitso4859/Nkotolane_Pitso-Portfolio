@@ -61,7 +61,6 @@ Key achievements:
         href: 'https://github.com/Pitso4859/GIGConnectSASkill.git',
       },
     ],
-    // No credentials - users create their own account
   },
   {
     title: 'FinTrackPro',
