@@ -11,7 +11,7 @@ import { useStreamingText } from '../hooks/useStreamingText';
 import { handleSectionNavClick } from '../lib/scroll';
 import { cn } from '../lib/utils';
 
-const PROFILE_IMAGE = '/images/profile.png';
+const PROFILE_IMAGE = '/images/profile.jpg';
 
 const ROLE = 'Software Developer';
 const HEADLINE_1 = 'Building scalable software solutions. ';
