@@ -1,3 +1,4 @@
+// src/components/Projects.tsx
 import { ArrowUpRight, Check, ExternalLink, Download } from './icons';
 import { projects, type Project } from '../data/projects';
 import { primaryButtonSm } from '../lib/button-styles';
@@ -29,10 +30,10 @@ function StackPills({ stack, max = 6 }: { stack: string[]; max?: number }) {
   );
 }
 
-function ProjectLinks({ 
-  links, 
-  downloadApk 
-}: { 
+function ProjectLinks({
+  links,
+  downloadApk,
+}: {
   links: NonNullable<Project['links']>;
   downloadApk?: string;
 }) {
@@ -50,7 +51,7 @@ function ProjectLinks({
           rel="noopener noreferrer"
           className={cn(
             'transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center gap-1.5 text-sm font-semibold',
-            link.label === 'Live Demo' 
+            link.label === 'Live Demo'
               ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 rounded-lg px-4 py-2 shadow-md'
               : i === 0 && link.label !== 'Live Demo'
               ? primaryButtonSm
@@ -69,7 +70,7 @@ function ProjectLinks({
           )}
         </a>
       ))}
-      
+
       {downloadApk && (
         <a
           href={downloadApk}
@@ -162,7 +163,7 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="mb-4 overflow-hidden rounded-xl">
           <ProjectThumbnail project={project} />
         </div>
-        
+
         {/* Content Section */}
         <div className="relative flex flex-col gap-2.5">
           <div>
@@ -173,22 +174,22 @@ function ProjectCard({ project }: { project: Project }) {
               {project.title}
             </h3>
           </div>
-          
+
           <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
             {project.description}
           </p>
-          
+
           <FeatureList features={project.features.slice(0, 4)} />
-          
+
           <p className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-1 leading-relaxed">
             <span className="font-semibold text-zinc-700 dark:text-zinc-400">Role — </span>
             {project.role}
           </p>
-          
+
           <StackPills stack={project.stack} max={6} />
-          
+
           {project.links && <ProjectLinks links={project.links} downloadApk={project.downloadApk} />}
-          
+
           {/* Optional: Add note about creating account */}
           {project.title === 'GIGConnectSA' && (
             <p className="text-[11px] text-center text-zinc-500 dark:text-zinc-500 mt-2 pt-1 border-t border-zinc-100 dark:border-zinc-800">
@@ -213,7 +214,7 @@ const Projects = () => {
             Projects
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-            Full-stack applications, AI-powered systems, and innovative software solutions. 
+            Full-stack applications, AI-powered systems, and innovative software solutions.
             Each project represents real-world impact and technical excellence.
           </p>
         </div>

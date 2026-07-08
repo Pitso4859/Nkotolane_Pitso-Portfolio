@@ -11,14 +11,14 @@ import { useStreamingText } from '../hooks/useStreamingText';
 import { handleSectionNavClick } from '../lib/scroll';
 import { cn } from '../lib/utils';
 
-const PROFILE_IMAGE = '/images/profile.jpg';
+const PROFILE_IMAGE = '/images/profile.png';
 
 const ROLE = 'Software Developer';
-const HEADLINE_1 = 'Building scalable software solutions. ';
-const HEADLINE_2 = 'Engineering secure, high-performance applications.';
+const HEADLINE_1 = 'Software developer who ships production code. ';
+const HEADLINE_2 = 'Java, Spring Boot, React — built, deployed, and running today.';
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 const BIO =
-  "I'm Pitso Nkotolane, a Software Developer building scalable web applications, REST APIs, and AI-powered solutions. I've helped improve page load time by 40%, worked on systems serving 10K+ users, and achieved 85% automated test coverage.";
+  "I'm Pitso Nkotolane, a Software Developer who backs every number with an engineering decision. I cut page load times by 40% through route-level code-splitting (React.lazy + Suspense), lazy-loaded images, and Redis-backed caching on the backend — not guesswork, but finding and fixing the actual bottleneck. My 85% test coverage comes from layered JUnit 5 suites — unit tests for business logic, Mockito-based service tests, and full MockMvc integration tests — the same pattern behind the 29 automated tests I shipped across one production API. Java, Spring Boot, React, TypeScript, and AI integrations — end to end, from architecture to deployment.";
 
 const CHAR_MS = 30;
 const HEADLINE_2_DELAY = HEADLINE_1.length * CHAR_MS;

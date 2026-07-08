@@ -64,53 +64,76 @@ Key achievements:
     // No credentials - users create their own account
   },
   {
-    title: 'Thusa AI Assistant',
-    tagline: 'TUT Student Assistant',
-    description: 'AI-powered student support assistant for Tshwane University of Technology — grounded chat with hybrid FAQ retrieval.',
-    stack: ['React', 'TypeScript', 'Vite', 'Node.js', 'Express', 'OpenAI', 'PostgreSQL'],
+    title: 'FinTrackPro',
+    tagline: 'SARS-Compliant AI Accounting',
+    description: 'SARS-compliant accounting platform with AI-powered financial insights — manage transactions, track VAT, and generate reports with Gemini AI analysis.',
+    detailedDescription: `FinTrackPro is a full-stack accounting platform built for South African businesses, combining automated tax compliance with AI-driven financial analysis.
+
+Key achievements:
+• Automated VAT 201 & CIT return generation
+• Gemini AI invoice OCR and financial analysis
+• Real-time financial dashboard with transaction tracking
+• JWT-secured multi-user access with role separation`,
+    stack: ['Spring Boot 3', 'React', 'TypeScript', 'PostgreSQL', 'Gemini AI', 'JWT', 'Docker'],
     features: [
-      'Streaming chat with database-grounded answers',
-      'Conversation memory with relevance filtering',
-      'Hybrid FAQ search across programmes & admissions',
-      'Scheduled agent for weekly TUT updates',
+      'Automated VAT 201 & CIT tax returns',
+      'Gemini AI invoice OCR & analysis',
+      'Real-time financial dashboard',
+      'JWT-secured multi-user access',
     ],
-    role: 'Full-Stack AI Developer - Built the chat interface, integrated OpenAI API, and implemented the RAG system for FAQ retrieval.',
-    thumbnail: '/images/projects/thusa.png',
-    thumbnailAlt: 'Thusa AI Assistant chat interface',
+    role: 'Full-Stack Developer - Built the Spring Boot backend and React frontend, integrated Gemini AI for invoice OCR and financial analysis, and implemented SARS-compliant tax return generation.',
+    thumbnail: '/images/projects/fintrack.png',
+    thumbnailAlt: 'FinTrackPro login screen - SARS-compliant accounting platform',
     thumbnailVariant: 'desktop',
     links: [
       {
         label: 'Live Demo',
-        href: 'https://thusa-tut-ai-chatbot.vercel.app',
+        href: 'https://fintrack-app-ytot.onrender.com',
       },
       {
-        label: 'View Code',
-        href: 'https://github.com/Pitso4859/thusa-ai-assistant.git',
+        label: 'API',
+        href: 'https://fintrack-api-aw96.onrender.com',
       },
     ],
   },
   {
-    title: 'OnSite Municipality',
-    tagline: 'Municipality Maintenance',
-    description: 'AI-powered maintenance and employment system with incident reporting, classification, and worker assignment.',
-    stack: ['React', 'Flutter', 'Firebase Auth', 'Firestore', 'Cloud Functions', 'TensorFlow'],
+    title: 'Mavuti Health Platform',
+    tagline: 'VUT Health Clinic Platform',
+    description: 'Full-stack clinic management platform for the VUT Health Clinic with AI health assistant, appointment booking, live slot availability, and role-based access.',
+    detailedDescription: `Mavuti Health is a production-grade clinic management platform built for the Vaal University of Technology Health Clinic, handling appointment booking for students, employees, and admins — now with a Gemini-powered AI health assistant.
+
+Key achievements:
+• AI Health Assistant powered by Google Gemini 1.5 Flash, with a hard-coded emergency-keyword bypass that never routes crisis messages through the AI
+• Live appointment booking with slot capacity management
+• Role-based access for students, staff, and admins with JWT + refresh tokens and per-user rate limiting (Bucket4j)
+• Async email notifications via JavaMailSender
+• Deployed with Docker (multi-stage, non-root) and GitHub Actions + Jenkins CI/CD on Render`,
+    stack: ['Spring Boot 3', 'Java 21', 'React 19', 'Vite', 'PostgreSQL', 'Redis', 'Docker', 'JWT', 'Gemini AI'],
     features: [
-      'Image-based incident reporting',
-      'Worker assignment algorithm',
-      'Event-driven Cloud Functions',
-      'Real-time status updates',
+      'AI Health Assistant (Gemini 1.5 Flash) with emergency-keyword safety bypass',
+      'JWT authentication with role-based access & rate limiting',
+      'Live slot availability & booking validation',
+      'Redis caching & async email notifications',
+      'Docker + GitHub Actions/Jenkins CI/CD on Render',
     ],
-    role: 'Lead Developer - Architected the system, implemented image classification, and built the worker assignment algorithm.',
-    thumbnail: '/images/projects/onsite.png',
-    thumbnailAlt: 'OnSite Municipality app interface',
-    thumbnailVariant: 'mobile',
+    role: 'Full-Stack Developer - Architected the Spring Boot backend and React frontend, implemented booking logic, slot capacity management, the Gemini AI health assistant, and Docker/CI-CD deployment.',
+    thumbnail: '/images/projects/mavuti.png',
+    thumbnailAlt: 'Mavuti Health Clinic login screen - VUT Health Clinic platform',
+    thumbnailVariant: 'desktop',
     links: [
       {
+        label: 'Live Demo',
+        href: 'https://mavuti-health.onrender.com',
+      },
+      {
+        label: 'API',
+        href: 'https://mavuti-api.onrender.com',
+      },
+      {
         label: 'View Code',
-        href: 'https://github.com/Pitso4859/onsite-municipality.git',
+        href: 'https://github.com/Pitso4859/mavuti-health-platform.git',
       },
     ],
-    downloadApk: '/apk/onsite-municipality.apk',
   },
   {
     title: 'AI Credit Card Fraud Detection',
