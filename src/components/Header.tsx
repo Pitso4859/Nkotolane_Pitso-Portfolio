@@ -1,5 +1,5 @@
 // src/components/Header.tsx
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Calendar, Sun, Moon } from './icons';
 import { cn } from '../lib/utils';
 import { useTheme } from '../contexts/ThemeContext';
@@ -20,6 +20,18 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const activeSectionRef = useRef('home');
+  const skipHashSync = useRef(true);
+
+  const updateSectionHash = useCallback((id: string) => {
+    if (typeof window !== 'undefined' && window.history.replaceState) {
+      if (id === 'home') {
+        window.history.replaceState(null, '', '/');
+      } else {
+        window.history.replaceState(null, '', `#${id}`);
+      }
+    }
+  }, []);
 
   const updateActiveSection = useCallback(() => {
     const offset = 100;
@@ -33,8 +45,19 @@ const Header = () => {
       if (scrollPos >= top) current = item.id;
     }
 
-    setActiveSection(current);
-  }, []);
+    if (current !== activeSectionRef.current) {
+      activeSectionRef.current = current;
+      setActiveSection(current);
+      // Keep the URL's hash matching what's actually on screen, so it can
+      // never get permanently stuck on a section you've scrolled away
+      // from. Skip the very first call so we don't fight a deep-link
+      // (e.g. someone opening the site straight to #contact).
+      if (!skipHashSync.current) {
+        updateSectionHash(current);
+      }
+    }
+    skipHashSync.current = false;
+  }, [updateSectionHash]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,19 +85,10 @@ const Header = () => {
     }
   };
 
-  const updateSectionHash = (id: string) => {
-    if (typeof window !== 'undefined' && window.history.replaceState) {
-      if (id === 'home') {
-        window.history.replaceState(null, '', '/');
-      } else {
-        window.history.replaceState(null, '', `#${id}`);
-      }
-    }
-  };
-
   const navigateToSection = (e: React.MouseEvent<HTMLElement>, id: string) => {
     e.preventDefault();
     setActiveSection(id);
+    activeSectionRef.current = id;
     setMobileMenuOpen(false);
     scrollToSectionId(id);
     updateSectionHash(id);
