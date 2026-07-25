@@ -25,8 +25,8 @@ const SKILLS = ['Java', 'Spring Boot', 'React', 'TypeScript', 'Python', 'SQL'];
 
 
 const STATS = [
-  { value: 'From', label: 'Born in\nSephukubje' },
-  { value: 'Johannesburg', label: 'Based in\nGauteng' },
+  { value: 'From', label: 'Sephukubje\n Village' },
+  { value: 'Currently', label: 'Based in Johannesburg,\nGauteng' },
   { value: 'Java', label: 'Primary\nLanguage' },
   { value: 'Full-Stack', label: 'Development\nFocus' },
 ];
