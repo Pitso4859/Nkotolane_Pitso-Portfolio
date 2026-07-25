@@ -1,5 +1,5 @@
 // src/components/About.tsx
-import { GraduationCap, Award, MapPin, Code } from './icons';
+import { GraduationCap, Award, MapPin, Code2 } from './icons';
 import { cn } from '../lib/utils';
 
 const highlights = [
@@ -20,7 +20,7 @@ const highlights = [
     text: 'Oracle Certified DevOps Professional | Microsoft Azure Fundamentals',
   },
   {
-    icon: Code,
+    icon: Code2,
     text: 'Passionate about building practical solutions with Java, Spring Boot, and React',
   },
 ];
