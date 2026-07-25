@@ -1,8 +1,12 @@
 // src/components/About.tsx
-import { GraduationCap, Award } from './icons';
+import { GraduationCap, Award, MapPin, Code } from './icons';
 import { cn } from '../lib/utils';
 
 const highlights = [
+  {
+    icon: MapPin,
+    text: 'From Sephukubje village, Sekgosese — now based in Johannesburg, South Africa',
+  },
   {
     icon: GraduationCap,
     text: 'Advanced Diploma in IT (In Progress) | Expected Nov 2026',
@@ -16,8 +20,8 @@ const highlights = [
     text: 'Oracle Certified DevOps Professional | Microsoft Azure Fundamentals',
   },
   {
-    icon: Award,
-    text: '11+ Certifications including CCNA, Spring Boot, and Git',
+    icon: Code,
+    text: 'Passionate about building practical solutions with Java, Spring Boot, and React',
   },
 ];
 
@@ -42,10 +46,10 @@ const About = () => {
             About
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-zinc-950 dark:text-white sm:text-4xl">
-            Software Developer with a passion for building impactful solutions
+            From a small village to building software for the world
           </h2>
           <p className="mt-2 text-lg font-medium text-zinc-800 dark:text-zinc-200">
-            Java, Spring Boot, React, Node.js · Full-Stack Developer
+            Java, Spring Boot, React · Full-Stack Developer
           </p>
           <ul className="mt-8 space-y-4">
             {highlights.map(({ icon: Icon, text }) => (
@@ -65,10 +69,10 @@ const About = () => {
             ))}
           </ul>
           <p className="mt-8 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-base">
-            I thrive in Agile environments where collaboration turns complex ideas into reliable
-            systems. With experience improving performance by 40%, serving 10,000+ users, and
-            contributing to AI-powered financial systems, I'm committed to delivering high-quality
-            software that makes a difference.
+            My journey from Sephukubje village to becoming a software developer has shaped my
+            approach to technology — I believe in building solutions that are practical, reliable,
+            and accessible. Whether it's developing full-stack applications or exploring AI
+            integrations, I'm driven by curiosity and a commitment to continuous learning.
           </p>
         </div>
       </div>
