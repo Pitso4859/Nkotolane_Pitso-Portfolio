@@ -53,58 +53,97 @@ interface Message {
 
 // ── Knowledge base ──────────────────────────────────────────────────────────
 const KNOWLEDGE: Record<string, BotMessage> = {
+  // ✅ Updated greeting with personal origin story
   greeting: {
-    text: "Hello! 👋 I'm Pitso's professional assistant. I can help you learn about his skills, experience, projects, and certifications — and you can download his resume or any certificate right here. What would you like to know?",
+    text: `Hello! 👋 I'm Pitso's professional assistant. 
+
+Pitso Nkotolane is a Software Developer from Sephukubje village in Sekgosese, Limpopo — now based in Johannesburg, South Africa. Growing up in a small village taught him resourcefulness and determination, which he brings to every project.
+
+I can help you learn about his skills, experience, projects, certifications, and personal journey. What would you like to know?`,
   },
+  
+  // ✅ New: Location/Origin story
+  location: {
+    text: `📍 Pitso's Journey:
+
+🏡 Born and raised in Sephukubje village, Sekgosese, Limpopo
+🏙️ Now based in Johannesburg, Gauteng, South Africa
+🎓 Studying at Vaal University of Technology (VUT)
+💻 Working as a Software Developer
+
+Growing up in a small village taught him resourcefulness, determination, and the value of hard work — skills he applies to every project he builds.
+
+"He believes that technology should be practical, reliable, and accessible to everyone — no matter where they come from."`,
+  },
+  
+  // ✅ Updated skills - removed percentage claims
   skills: {
     text: `Pitso's core technical skills:
 
-• Java (Spring Boot, Hibernate) — 88%
-• JavaScript / TypeScript (React, Node.js) — 85%
-• Python (ML, Data Analysis) — 78%
-• Databases (MySQL, PostgreSQL, MongoDB) — 87%
-• REST API Design — 90%
-• Cloud (Oracle Cloud, Azure, AWS) — 85%
-• DevOps (Docker, CI/CD) — 75%`,
+• Java (Spring Boot, Hibernate) — Primary language
+• JavaScript / TypeScript (React, Node.js) — Frontend & Backend
+• Python (ML, Data Analysis) — AI & Data
+• Databases (MySQL, PostgreSQL, MongoDB) — SQL & NoSQL
+• REST API Design — Building reliable APIs
+• Cloud (Oracle Cloud, Azure, AWS) — Cloud certified
+• DevOps (Docker, CI/CD) — Containerization & automation
+
+He's always learning and expanding his toolkit.`,
   },
+  
+  // ✅ Updated experience - removed unverifiable metrics
   experience: {
     text: `Pitso's professional experience (2024 – Present):
 
-• Improved page load time by 40%
-• Worked on production systems serving 10,000+ users
-• Contributed to AI-powered financial systems
-• Achieved 85% automated test coverage
 • Full-stack development with Java, Spring Boot & React
-• Agile / Scrum team collaboration`,
+• Building production-ready applications
+• Collaborating in Agile / Scrum teams
+• Contributing to AI-powered systems
+• Deploying applications with Docker and CI/CD
+• Writing clean, maintainable code
+
+His experience spans from academic projects to real-world applications, with a focus on practical solutions that solve real problems.`,
   },
+  
+  // ✅ Updated projects - more detailed
   projects: {
     text: `Pitso's featured projects:
 
-• GIGConnectSkill SA — FNB Hackathon mobile marketplace for informal workers (React Native, Expo, Firebase)
+• GIGConnectSkill SA — FNB Hackathon mobile marketplace connecting informal workers with clients (Spring Boot, React, PostgreSQL, Gemini AI)
+• Mavuti Health Platform — Full-stack clinic management system with AI health assistant (Spring Boot, React, PostgreSQL, Docker)
 • AI Credit Card Fraud Detection — ML pipeline with 94% accuracy (Python, scikit-learn, XGBoost)
-• Celse Academy Management System — Enterprise educational platform (Java, Spring Boot, MySQL)
-• VUT Eats — Campus food ordering platform (PHP, MySQL, JavaScript)
-• Clinic Management System — Healthcare system in development (Java, Spring Boot, React)
-• This Portfolio — React, TypeScript, Tailwind CSS with AI chatbot`,
+• FinTrackPro — SARS-compliant accounting platform with AI insights (Spring Boot, React, PostgreSQL)
+• This Portfolio — React, TypeScript, Tailwind CSS with AI chatbot
+
+Each project represents real-world impact and technical growth.`,
   },
+  
+  // ✅ Updated education - removed "11+" claim
   education: {
     text: `Pitso's education:
 
-🎓 Advanced Diploma in Information Technology — TUT (In Progress, Expected Nov 2026)
-🎓 Diploma in Information Technology — TUT (Completed Nov 2025)
-📜 11+ Professional Certifications (Oracle, Azure, CCNA, Spring Boot, and more)`,
+🎓 Advanced Diploma in Information Technology — Vaal University of Technology (In Progress, Expected Nov 2026)
+🎓 Diploma in Information Technology — Vaal University of Technology (Completed Nov 2025)
+📜 Professional Certifications (Oracle DevOps, Azure Fundamentals, CCNA, Spring Boot, and more)
+
+His academic journey reflects his commitment to continuous learning and professional growth.`,
   },
+  
+  // ✅ Updated why hire - removed inflated metrics
   whyHire: {
     text: `Why hire Pitso?
 
-✓ Proven impact — 40% performance improvement, 10K+ user systems
-✓ 11+ certifications including Oracle DevOps & Azure Fundamentals
-✓ Full-stack expertise — Java, Spring Boot, React, Node.js
+✓ Full-stack expertise — Java, Spring Boot, React, TypeScript
+✓ Cloud certified — Oracle DevOps & Microsoft Azure
 ✓ AI & ML knowledge — Python, scikit-learn, data analysis
-✓ Cloud certified — Oracle Cloud & Microsoft Azure
-✓ Currently pursuing Advanced Diploma in IT
-✓ Open to full-time roles, freelance, and collaborations`,
+✓ Strong academic foundation — Advanced Diploma in IT
+✓ Resourceful and determined — from village to software developer
+✓ Open to full-time roles, freelance, and collaborations
+✓ Passionate about building practical, reliable solutions
+
+"He doesn't just write code — he solves problems."`,
   },
+  
   contact: {
     text: `You can reach Pitso through:
 
@@ -116,6 +155,7 @@ const KNOWLEDGE: Record<string, BotMessage> = {
 
 Or scroll down to book a call directly on this page!`,
   },
+  
   booking: {
     text: `To book a call with Pitso:
 
@@ -125,14 +165,17 @@ Or scroll down to book a call directly on this page!`,
 4. Enter your name and email
 5. You'll receive a confirmation email right away!`,
   },
+  
   resume: {
     text: '📄 Here is Pitso\'s resume — click to download:',
     files: [{ label: '📥 Download Resume / CV', url: FILES.resume }],
   },
+  
   allCerts: {
     text: '📜 Here are all of Pitso\'s 12 certificates — click any to download:',
     files: ALL_CERTS.map(c => ({ label: `📥 ${c.label}`, url: c.url })),
   },
+  
   certOracle:        { text: '📜 Oracle DevOps Professional Certificate:',           files: [{ label: '📥 Download Oracle DevOps Certificate',       url: FILES.oracle }] },
   certAzure:         { text: '📜 Microsoft Azure Fundamentals Certificate:',          files: [{ label: '📥 Download Azure Fundamentals Certificate',  url: FILES.azure }] },
   certSpringBoot:    { text: '📜 Spring Boot for Beginners Certificate:',             files: [{ label: '📥 Download Spring Boot Certificate',         url: FILES.springBoot }] },
@@ -145,10 +188,12 @@ Or scroll down to book a call directly on this page!`,
   certJS:            { text: '📜 JavaScript Essentials 2 Certificate:',               files: [{ label: '📥 Download JavaScript Certificate',          url: FILES.javascript }] },
   certNetworking:    { text: '📜 Networking Basics Certificate:',                     files: [{ label: '📥 Download Networking Basics Certificate',   url: FILES.networking }] },
   certOS:            { text: '📜 Operating Systems Basics Certificate:',              files: [{ label: '📥 Download Operating Systems Certificate',   url: FILES.os }] },
+  
   help: {
     text: `I can help you with:
 
-• Pitso's skills and technologies
+• Pitso's background and journey from Sephukubje village
+• Skills and technologies
 • Professional experience
 • Featured projects
 • Education & certifications
@@ -168,6 +213,14 @@ function getResponse(input: string): BotMessage {
 
   if (q.match(/^(hi|hello|hey|good morning|good afternoon|howzit)/)) return KNOWLEDGE.greeting;
   if (q.includes('help') || q === 'what can you do') return KNOWLEDGE.help;
+
+  // ✅ Location / Origin keywords (new)
+  if (q.includes('village') || q.includes('sephukubje') || q.includes('sekgosese') || 
+      q.includes('limpopo') || q.includes('johannesburg') || q.includes('location') || 
+      q.includes('where') || q.includes('from') || q.includes('born') || q.includes('grew up') ||
+      q.includes('origin') || q.includes('hometown') || q.includes('background')) {
+    return KNOWLEDGE.location;
+  }
 
   // Resume / CV
   if (q.includes('resume') || q.includes('cv') || q.includes('curriculum')) return KNOWLEDGE.resume;
@@ -208,18 +261,20 @@ function getResponse(input: string): BotMessage {
   if (q.includes('book') || q.includes('call') || q.includes('meeting') || q.includes('schedule')) return KNOWLEDGE.booking;
 
   return {
-    text: "I'm not sure about that. Try asking about Pitso's skills, projects, experience, certifications, or how to book a call — I'm happy to help with any of those!",
+    text: "I'm not sure about that. Try asking about Pitso's background (where he's from), skills, projects, experience, certifications, or how to book a call — I'm happy to help with any of those!",
   };
 }
 
 // ── Suggestion chips ────────────────────────────────────────────────────────
+// ✅ Updated suggestions to include location
 const SUGGESTIONS = [
+  "Where is Pitso from?",
   "What are Pitso's skills?",
   'Download his resume',
   'Show all certificates',
   'Tell me about his projects',
-  'How do I book a call?',
   'Why should I hire him?',
+  'How do I book a call?',
 ];
 
 // ── Download button component ───────────────────────────────────────────────
@@ -368,7 +423,7 @@ const Chatbot = () => {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
             </span>
             <span className="whitespace-nowrap text-xs font-medium text-zinc-700 dark:text-zinc-300">
-              Ask me about Pitso! 👋
+              Ask about Pitso! 🌍
             </span>
             <button
               onClick={e => { e.stopPropagation(); setShowHint(false); }}
@@ -420,7 +475,7 @@ const Chatbot = () => {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-white leading-tight">Pitso's Assistant</p>
-            <p className="text-[11px] text-indigo-200">Instant answers · Cert downloads · Online</p>
+            <p className="text-[11px] text-indigo-200">From Sephukubje to software dev</p>
           </div>
           <button onClick={clearChat} title="New chat" className="rounded-lg p-1.5 text-white/60 hover:bg-white/20 hover:text-white transition-colors">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -498,7 +553,7 @@ const Chatbot = () => {
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              placeholder="Ask about skills, projects, certificates..."
+              placeholder="Ask about his journey, skills, projects..."
               disabled={isLoading}
               maxLength={300}
               className="flex-1 min-w-0 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3.5 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:opacity-50 transition-all"
@@ -518,7 +573,7 @@ const Chatbot = () => {
               </svg>
             </button>
           </form>
-          <p className="mt-1.5 text-center text-[10px] text-zinc-400 dark:text-zinc-600">Instant answers — no AI needed</p>
+          <p className="mt-1.5 text-center text-[10px] text-zinc-400 dark:text-zinc-600">From Sephukubje village to building software</p>
         </div>
       </div>
     </>
