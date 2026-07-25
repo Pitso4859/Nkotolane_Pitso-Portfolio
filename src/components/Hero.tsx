@@ -14,8 +14,8 @@ import { cn } from '../lib/utils';
 const PROFILE_IMAGE = '/images/profile.png';
 
 const ROLE = 'Software Developer';
-const HEADLINE_1 = 'Turning ideas into reliable software with';
-const HEADLINE_2 = ' [Java, Spring Boot, React ] \n| From Sephukubje village to the world.';
+const HEADLINE_1 = 'Turning ideas into reliable software with [Java, Spring Boot, React ]';
+const HEADLINE_2 = '| From Sephukubje village to the world.';
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 
 const BIO =
