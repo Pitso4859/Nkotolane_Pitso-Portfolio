@@ -14,8 +14,8 @@ import { cn } from '../lib/utils';
 const PROFILE_IMAGE = '/images/profile.png';
 
 const ROLE = 'Software Developer';
-const HEADLINE_1 = 'Building software that works. ';
-const HEADLINE_2 = ' (Java, Spring Boot, React ) | From the village to the world.';
+const HEADLINE_1 = 'Turning ideas into reliable software with';
+const HEADLINE_2 = ' [Java, Spring Boot, React ] | From the village to the world.';
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 
 const BIO =
@@ -25,7 +25,7 @@ const SKILLS = ['Java', 'Spring Boot', 'React', 'TypeScript', 'Python', 'SQL'];
 
 
 const STATS = [
-  { value: 'Village', label: 'Born in\nSephukubje' },
+  { value: 'From', label: 'Born in\nSephukubje' },
   { value: 'Johannesburg', label: 'Based in\nGauteng' },
   { value: 'Java', label: 'Primary\nLanguage' },
   { value: 'Full-Stack', label: 'Development\nFocus' },
