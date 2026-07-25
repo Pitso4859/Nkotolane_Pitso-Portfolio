@@ -18,13 +18,13 @@ const HEADLINE_1 = 'Building reliable software with ';
 const HEADLINE_2 = 'Java, Spring Boot, React & modern technologies.';
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 
-// ✅ Authentic, verifiable bio for a graduate/junior developer
+// Authentic, verifiable bio for a graduate/junior developer
 const BIO =
   "I'm Pitso Nkotolane, a Software Developer passionate about building scalable and reliable applications. I specialize in Java, Spring Boot, React, and TypeScript, with experience in database design and deployment. I focus on writing clean, maintainable code and continuously expanding my skills through personal projects and academic work.";
 
 const SKILLS = ['Java', 'Spring Boot', 'React', 'TypeScript', 'Python', 'SQL'];
 
-// ✅ Realistic, verifiable stats
+// Realistic, verifiable stats
 const STATS = [
   { value: '5+', label: 'Projects\nCompleted' },
   { value: 'Java', label: 'Primary\nLanguage' },
