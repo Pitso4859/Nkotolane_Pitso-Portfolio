@@ -15,11 +15,11 @@ const PROFILE_IMAGE = '/images/profile.png';
 
 const ROLE = 'Software Developer';
 const HEADLINE_1 = 'Building software that works. ';
-const HEADLINE_2 = 'Java, Spring Boot, React — from the village to the world.';
+const HEADLINE_2 = ' (Java, Spring Boot, React ) | From the village to the world.';
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 
 const BIO =
-  "I'm Pitso Nkotolane, a Software Developer from Sephukubje village in Sekgosese, now based in Johannesburg, South Africa. Growing up in a small village taught me resourcefulness and determination — skills I bring to every project. I specialize in Java, Spring Boot, React, and TypeScript, building practical solutions that solve real problems. From academic projects to real-world applications, I'm driven by curiosity and a desire to create technology that makes a difference.";
+  "I'm Pitso Nkotolane, a Software Developer from Sephukubje village in Sekgosese, now based in Johannesburg, South Africa. Growing up in a small village taught me resourcefulness and determination skills I bring to every project. I specialize in Java, Spring Boot, React, and TypeScript, building practical solutions that solve real problems. From academic projects to real-world applications, I'm driven by curiosity and a desire to create technology that makes a difference.";
 
 const SKILLS = ['Java', 'Spring Boot', 'React', 'TypeScript', 'Python', 'SQL'];
 
