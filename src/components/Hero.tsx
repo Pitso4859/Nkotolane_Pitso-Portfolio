@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Calendar } from './icons';
 import { FaJava, FaPython, FaDatabase, FaDocker } from 'react-icons/fa';
-import { SiSpringboot, SiReact } from 'react-icons/si';
+import { SiSpringboot, SiReact, SiNodedotjs } from 'react-icons/si';
 import PrimaryButton from './ui/PrimaryButton';
 import { StreamingCursor } from './ui/StreamingText';
 import { secondaryButton } from '../lib/button-styles';
@@ -14,21 +14,20 @@ import { cn } from '../lib/utils';
 const PROFILE_IMAGE = '/images/profile.png';
 
 const ROLE = 'Software Developer';
-const HEADLINE_1 = 'Building reliable software with ';
-const HEADLINE_2 = 'Java, Spring Boot, React & modern technologies.';
+const HEADLINE_1 = 'Building software that works. ';
+const HEADLINE_2 = 'Java, Spring Boot, React — from the village to the world.';
 const HEADLINE_FULL = HEADLINE_1 + HEADLINE_2;
 
-// Authentic, verifiable bio for a graduate/junior developer
 const BIO =
-  "I'm Pitso Nkotolane, a Software Developer passionate about building scalable and reliable applications. I specialize in Java, Spring Boot, React, and TypeScript, with experience in database design and deployment. I focus on writing clean, maintainable code and continuously expanding my skills through personal projects and academic work.";
+  "I'm Pitso Nkotolane, a Software Developer from Sephukubje village in Sekgosese, now based in Johannesburg, South Africa. Growing up in a small village taught me resourcefulness and determination — skills I bring to every project. I specialize in Java, Spring Boot, React, and TypeScript, building practical solutions that solve real problems. From academic projects to real-world applications, I'm driven by curiosity and a desire to create technology that makes a difference.";
 
 const SKILLS = ['Java', 'Spring Boot', 'React', 'TypeScript', 'Python', 'SQL'];
 
-// Realistic, verifiable stats
+
 const STATS = [
-  { value: '5+', label: 'Projects\nCompleted' },
+  { value: 'Village', label: 'Born in\nSephukubje' },
+  { value: 'Johannesburg', label: 'Based in\nGauteng' },
   { value: 'Java', label: 'Primary\nLanguage' },
-  { value: 'Spring', label: 'Main\nFramework' },
   { value: 'Full-Stack', label: 'Development\nFocus' },
 ];
 
@@ -58,7 +57,7 @@ const Hero = () => {
     e.preventDefault();
     const element = document.getElementById('booking-section');
     if (element) {
-      const navHeight = 80; // Adjust to your navbar height
+      const navHeight = 80;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementPosition - navHeight,
@@ -73,7 +72,7 @@ const Hero = () => {
       id="home"
       className="relative flex min-h-0 items-center overflow-visible pt-24 sm:pt-28 lg:min-h-[80vh] lg:pt-32"
     >
-      {/* Animated background elements with will-change optimization */}
+      {/* Animated background elements */}
       <div
         aria-hidden
         className="pointer-events-none absolute -left-32 top-20 h-[480px] w-[480px] rounded-full bg-gradient-to-r from-indigo-500/20 to-purple-500/20 blur-[120px] animate-pulse"
@@ -122,7 +121,7 @@ const Hero = () => {
               <StreamingCursor visible={headlineStreaming} />
             </h1>
 
-            {/* Bio */}
+            {/* Bio - Human and personal */}
             <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg mx-auto lg:mx-0">
               {BIO}
             </p>
@@ -139,7 +138,7 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* Stats - Realistic and verifiable */}
+            {/* Stats - Personal and verifiable */}
             <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-6">
               {STATS.map(({ value, label }) => (
                 <div key={value + label} className="text-center">
@@ -187,7 +186,7 @@ const Hero = () => {
                 <div className="rounded-full overflow-hidden bg-zinc-50 dark:bg-zinc-800">
                   <img
                     src={PROFILE_IMAGE}
-                    alt="Pitso Nkotolane, Software Developer"
+                    alt="Pitso Nkotolane, Software Developer from Sephukubje village, now based in Johannesburg"
                     width={360}
                     height={360}
                     loading="eager"
@@ -199,15 +198,13 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Tech Icons with proper animation delays */}
-              {/* Java - Top Right */}
+              {/* Tech Icons */}
               <div className="absolute -top-4 -right-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg animate-bounce">
                   <FaJava className="text-white text-xl" aria-hidden />
                 </div>
               </div>
 
-              {/* Spring Boot - Bottom Right */}
               <div className="absolute -bottom-4 -right-4">
                 <div 
                   className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg animate-bounce"
@@ -217,7 +214,6 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* React - Bottom Left */}
               <div className="absolute -bottom-4 -left-4">
                 <div 
                   className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg animate-bounce"
@@ -227,14 +223,12 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Python - Top Center */}
               <div className="absolute -top-8 left-1/2 -translate-x-1/2">
                 <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-yellow-500 flex items-center justify-center shadow-lg animate-pulse">
                   <FaPython className="text-white text-lg" aria-hidden />
                 </div>
               </div>
 
-              {/* Database - Right Center */}
               <div className="absolute right-[-25px] top-1/2 -translate-y-1/2">
                 <div 
                   className="w-11 h-11 rounded-full bg-gradient-to-br from-slate-500 to-gray-700 flex items-center justify-center shadow-lg animate-pulse"
@@ -244,7 +238,6 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Docker - Left Center */}
               <div className="absolute left-[-25px] top-1/2 -translate-y-1/2">
                 <div 
                   className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-lg animate-pulse"
