@@ -32,7 +32,6 @@ export const projects: Project[] = [
   },
   {
     title: 'FinTrackPro',
-<<<<<<< HEAD
     tagline: 'Accounting Platform',
     description: 'A South African accounting application for transaction management, VAT tracking, reporting and assisted invoice analysis.',
     detailedDescription: 'FinTrackPro is a full stack accounting platform for small business workflows. I built backend services and frontend screens, connected financial data to reporting features and integrated invoice analysis.',
@@ -54,90 +53,6 @@ export const projects: Project[] = [
     role: 'Full Stack Developer. Implemented booking logic, backend APIs, frontend workflows, authentication and deployment configuration.',
     thumbnail: '/images/projects/mavuti.webp',
     thumbnailAlt: 'Mavuti Health Platform application interface',
-=======
-    tagline: 'SARS-Compliant AI Accounting',
-    description: 'SARS-compliant accounting platform with AI-powered financial insights — manage transactions, track VAT, and generate reports with Gemini AI analysis.',
-    detailedDescription: `FinTrackPro is a full-stack accounting platform built for South African businesses, combining automated tax compliance with AI-driven financial analysis.
-
-Key achievements:
-• Automated VAT 201 & CIT return generation
-• Gemini AI invoice OCR and financial analysis
-• Real-time financial dashboard with transaction tracking
-• JWT-secured multi-user access with role separation`,
-    stack: ['Spring Boot 3', 'React', 'TypeScript', 'PostgreSQL', 'Gemini AI', 'JWT', 'Docker'],
-    features: [
-      'Automated VAT 201 & CIT tax returns',
-      'Gemini AI invoice OCR & analysis',
-      'Real-time financial dashboard',
-      'JWT-secured multi-user access',
-    ],
-    role: 'Full-Stack Developer - Built the Spring Boot backend and React frontend, integrated Gemini AI for invoice OCR and financial analysis, and implemented SARS-compliant tax return generation.',
-    thumbnail: '/images/projects/fintrack.png',
-    thumbnailAlt: 'FinTrackPro login screen - SARS-compliant accounting platform',
-    thumbnailVariant: 'desktop',
-    links: [
-      {
-        label: 'Live Demo',
-        href: 'https://fintrack-app-ytot.onrender.com',
-      },
-      {
-        label: 'API',
-        href: 'https://fintrack-api-aw96.onrender.com',
-      },
-    ],
-  },
-  {
-    title: 'Mavuti Health Platform',
-    tagline: 'VUT Health Clinic Platform',
-    description: 'Full-stack clinic management platform for the VUT Health Clinic with AI health assistant, appointment booking, live slot availability, and role-based access.',
-    detailedDescription: `Mavuti Health is a production-grade clinic management platform built for the Vaal University of Technology Health Clinic, handling appointment booking for students, employees, and admins — now with a Gemini-powered AI health assistant.
-
-Key achievements:
-• AI Health Assistant powered by Google Gemini 1.5 Flash, with a hard-coded emergency-keyword bypass that never routes crisis messages through the AI
-• Live appointment booking with slot capacity management
-• Role-based access for students, staff, and admins with JWT + refresh tokens and per-user rate limiting (Bucket4j)
-• Async email notifications via JavaMailSender
-• Deployed with Docker (multi-stage, non-root) and GitHub Actions + Jenkins CI/CD on Render`,
-    stack: ['Spring Boot 3', 'Java 21', 'React 19', 'Vite', 'PostgreSQL', 'Redis', 'Docker', 'JWT', 'Gemini AI'],
-    features: [
-      'AI Health Assistant (Gemini 1.5 Flash) with emergency-keyword safety bypass',
-      'JWT authentication with role-based access & rate limiting',
-      'Live slot availability & booking validation',
-      'Redis caching & async email notifications',
-      'Docker + GitHub Actions/Jenkins CI/CD on Render',
-    ],
-    role: 'Full-Stack Developer - Architected the Spring Boot backend and React frontend, implemented booking logic, slot capacity management, the Gemini AI health assistant, and Docker/CI-CD deployment.',
-    thumbnail: '/images/projects/mavuti.png',
-    thumbnailAlt: 'Mavuti Health Clinic login screen - VUT Health Clinic platform',
-    thumbnailVariant: 'desktop',
-    links: [
-      {
-        label: 'Live Demo',
-        href: 'https://mavuti-health.onrender.com',
-      },
-      {
-        label: 'API',
-        href: 'https://mavuti-api.onrender.com',
-      },
-      {
-        label: 'View Code',
-        href: 'https://github.com/Pitso4859/mavuti-health-platform.git',
-      },
-    ],
-  },
-  {
-    title: 'AI Credit Card Fraud Detection',
-    tagline: 'Machine Learning',
-    description: 'ML pipeline detecting real-time fraudulent transactions with 94% accuracy using Python and scikit-learn.',
-    stack: ['Python', 'scikit-learn', 'pandas', 'NumPy', 'XGBoost', 'SHAP'],
-    features: [
-      'Real-time fraud detection',
-      '94% model accuracy',
-      'Feature engineering with SMOTE',
-      'Model explainability with SHAP',
-    ],
-    role: 'ML Engineer - Developed the fraud detection pipeline, performed feature engineering, and optimized model performance.',
->>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
     thumbnailVariant: 'desktop',
     links: [{ label: 'Live Demo', href: 'https://mavuti-health.onrender.com' }, { label: 'API', href: 'https://mavuti-api.onrender.com' }, { label: 'GitHub', href: 'https://github.com/Pitso4859/mavuti-health-platform.git' }],
   },
