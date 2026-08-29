@@ -53,7 +53,9 @@ interface Message {
 
 // ── Knowledge base ──────────────────────────────────────────────────────────
 const KNOWLEDGE: Record<string, BotMessage> = {
+  // ✅ Updated greeting with personal origin story
   greeting: {
+<<<<<<< HEAD
     text: `Hello. I am Pitso's portfolio assistant.
 
 Pitso Nkotolane is a Software Developer from Sephukubje Village in Limpopo and is now based in Johannesburg, South Africa.
@@ -69,10 +71,34 @@ I can help you review his skills, projects, experience, education, certificates,
 • Building his career in software development
 
 Growing up in a small village shaped his resourcefulness, persistence and willingness to learn independently.`,
+=======
+    text: `Hello! 👋 I'm Pitso's professional assistant. 
+
+Pitso Nkotolane is a Software Developer from Sephukubje village in Sekgosese, Limpopo — now based in Johannesburg, South Africa. Growing up in a small village taught him resourcefulness and determination, which he brings to every project.
+
+I can help you learn about his skills, experience, projects, certifications, and personal journey. What would you like to know?`,
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   },
+  
+  // ✅ New: Location/Origin story
+  location: {
+    text: `📍 Pitso's Journey:
+
+🏡 Born and raised in Sephukubje village, Sekgosese, Limpopo
+🏙️ Now based in Johannesburg, Gauteng, South Africa
+🎓 Studying at Vaal University of Technology (VUT)
+💻 Working as a Software Developer
+
+Growing up in a small village taught him resourcefulness, determination, and the value of hard work — skills he applies to every project he builds.
+
+"He believes that technology should be practical, reliable, and accessible to everyone — no matter where they come from."`,
+  },
+  
+  // ✅ Updated skills - removed percentage claims
   skills: {
     text: `Pitso's core technical skills:
 
+<<<<<<< HEAD
 • Java with Spring Boot and Hibernate
 • React, TypeScript and JavaScript
 • Python for machine learning and data work
@@ -81,20 +107,47 @@ Growing up in a small village shaped his resourcefulness, persistence and willin
 • Docker, Git, CI/CD and cloud fundamentals
 
 Java and Spring Boot are his strongest development focus.`,
+=======
+• Java (Spring Boot, Hibernate) — Primary language
+• JavaScript / TypeScript (React, Node.js) — Frontend & Backend
+• Python (ML, Data Analysis) — AI & Data
+• Databases (MySQL, PostgreSQL, MongoDB) — SQL & NoSQL
+• REST API Design — Building reliable APIs
+• Cloud (Oracle Cloud, Azure, AWS) — Cloud certified
+• DevOps (Docker, CI/CD) — Containerization & automation
+
+He's always learning and expanding his toolkit.`,
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   },
+  
+  // ✅ Updated experience - removed unverifiable metrics
   experience: {
     text: `Pitso's current experience:
 
+<<<<<<< HEAD
 • Contributes to customer facing software and AI enabled financial systems
 • Works on application performance, frontend behaviour and code quality
 • Uses automated testing and iterative Agile delivery
 • Supports deployment and maintenance of application features
 
 His portfolio also includes academic, hackathon and independent software projects.`,
+=======
+• Full-stack development with Java, Spring Boot & React
+• Building production-ready applications
+• Collaborating in Agile / Scrum teams
+• Contributing to AI-powered systems
+• Deploying applications with Docker and CI/CD
+• Writing clean, maintainable code
+
+His experience spans from academic projects to real-world applications, with a focus on practical solutions that solve real problems.`,
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   },
+  
+  // ✅ Updated projects - more detailed
   projects: {
     text: `Pitso's featured projects:
 
+<<<<<<< HEAD
 • GIGConnectSA, a marketplace for informal workers and clients
 • Mavuti Health Platform, a clinic management application
 • Credit Card Fraud Detection, a Python machine learning project
@@ -102,17 +155,39 @@ His portfolio also includes academic, hackathon and independent software project
 • This portfolio, built with React, TypeScript and Tailwind CSS
 
 The project section includes live demos and source code where available.`,
+=======
+• GIGConnectSkill SA — FNB Hackathon mobile marketplace connecting informal workers with clients (Spring Boot, React, PostgreSQL, Gemini AI)
+• Mavuti Health Platform — Full-stack clinic management system with AI health assistant (Spring Boot, React, PostgreSQL, Docker)
+• AI Credit Card Fraud Detection — ML pipeline with 94% accuracy (Python, scikit-learn, XGBoost)
+• FinTrackPro — SARS-compliant accounting platform with AI insights (Spring Boot, React, PostgreSQL)
+• This Portfolio — React, TypeScript, Tailwind CSS with AI chatbot
+
+Each project represents real-world impact and technical growth.`,
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   },
+  
+  // ✅ Updated education - removed "11+" claim
   education: {
     text: `Pitso's education:
 
+<<<<<<< HEAD
 • Advanced Diploma in Information Technology at Vaal University of Technology, in progress
 • Diploma in Information Technology at Vaal University of Technology, completed in 2025
 • Professional certificates in cloud, DevOps, networking and software development`,
+=======
+🎓 Advanced Diploma in Information Technology — Vaal University of Technology (In Progress, Expected Nov 2026)
+🎓 Diploma in Information Technology — Vaal University of Technology (Completed Nov 2025)
+📜 Professional Certifications (Oracle DevOps, Azure Fundamentals, CCNA, Spring Boot, and more)
+
+His academic journey reflects his commitment to continuous learning and professional growth.`,
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   },
+  
+  // ✅ Updated why hire - removed inflated metrics
   whyHire: {
     text: `Why consider Pitso for a developer role?
 
+<<<<<<< HEAD
 • Strong Java and Spring Boot focus
 • Hands on full stack project experience
 • Experience with React, TypeScript and SQL
@@ -120,7 +195,19 @@ The project section includes live demos and source code where available.`,
 • Practical experience integrating AI services where they support a product need
 • Clear motivation to learn from an experienced development team
 • Open to Junior Software Developer, Java Developer and Full Stack opportunities`,
+=======
+✓ Full-stack expertise — Java, Spring Boot, React, TypeScript
+✓ Cloud certified — Oracle DevOps & Microsoft Azure
+✓ AI & ML knowledge — Python, scikit-learn, data analysis
+✓ Strong academic foundation — Advanced Diploma in IT
+✓ Resourceful and determined — from village to software developer
+✓ Open to full-time roles, freelance, and collaborations
+✓ Passionate about building practical, reliable solutions
+
+"He doesn't just write code — he solves problems."`,
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   },
+  
   contact: {
     text: `You can reach Pitso through:
 
@@ -132,6 +219,7 @@ The project section includes live demos and source code where available.`,
 
 You can also use the booking section on this portfolio to schedule a call.`,
   },
+  
   booking: {
     text: `To book a call with Pitso:
 
@@ -141,6 +229,7 @@ You can also use the booking section on this portfolio to schedule a call.`,
 4. Enter your name and email
 5. Submit the booking request`,
   },
+<<<<<<< HEAD
   resume: { text: 'Here is Pitso\'s CV. Use the button below to download it.', files: [{ label: 'Download CV', url: FILES.resume }] },
   allCerts: { text: 'Here are Pitso\'s certificates. Select any certificate to download it.', files: ALL_CERTS.map(c => ({ label: c.label, url: c.url })) },
   certOracle: { text: 'Oracle DevOps Professional Certificate', files: [{ label: 'Download Oracle DevOps Certificate', url: FILES.oracle }] },
@@ -155,10 +244,40 @@ You can also use the booking section on this portfolio to schedule a call.`,
   certJS: { text: 'JavaScript Essentials 2 Certificate', files: [{ label: 'Download JavaScript Certificate', url: FILES.javascript }] },
   certNetworking: { text: 'Networking Basics Certificate', files: [{ label: 'Download Networking Basics Certificate', url: FILES.networking }] },
   certOS: { text: 'Operating Systems Basics Certificate', files: [{ label: 'Download Operating Systems Certificate', url: FILES.os }] },
+=======
+  
+  resume: {
+    text: '📄 Here is Pitso\'s resume — click to download:',
+    files: [{ label: '📥 Download Resume / CV', url: FILES.resume }],
+  },
+  
+  allCerts: {
+    text: '📜 Here are all of Pitso\'s 12 certificates — click any to download:',
+    files: ALL_CERTS.map(c => ({ label: `📥 ${c.label}`, url: c.url })),
+  },
+  
+  certOracle:        { text: '📜 Oracle DevOps Professional Certificate:',           files: [{ label: '📥 Download Oracle DevOps Certificate',       url: FILES.oracle }] },
+  certAzure:         { text: '📜 Microsoft Azure Fundamentals Certificate:',          files: [{ label: '📥 Download Azure Fundamentals Certificate',  url: FILES.azure }] },
+  certSpringBoot:    { text: '📜 Spring Boot for Beginners Certificate:',             files: [{ label: '📥 Download Spring Boot Certificate',         url: FILES.springBoot }] },
+  certGit:           { text: '📜 Git & GitHub Fundamentals Certificate:',             files: [{ label: '📥 Download Git & GitHub Certificate',        url: FILES.git }] },
+  certJava:          { text: '📜 Java Object-Oriented Programming Certificate:',      files: [{ label: '📥 Download Java OOP Certificate',            url: FILES.java }] },
+  certCCNA:          { text: '📜 CCNA: Introduction to Networks Certificate:',        files: [{ label: '📥 Download CCNA Certificate',                url: FILES.ccna }] },
+  certHTML:          { text: '📜 HTML Essentials Certificate:',                        files: [{ label: '📥 Download HTML Essentials Certificate',     url: FILES.html }] },
+  certIBM:           { text: '📜 IBM Design Certificate:',                             files: [{ label: '📥 Download IBM Design Certificate',          url: FILES.ibm }] },
+  certCyber:         { text: '📜 Introduction to Cybersecurity Certificate:',         files: [{ label: '📥 Download Cybersecurity Certificate',        url: FILES.cybersecurity }] },
+  certJS:            { text: '📜 JavaScript Essentials 2 Certificate:',               files: [{ label: '📥 Download JavaScript Certificate',          url: FILES.javascript }] },
+  certNetworking:    { text: '📜 Networking Basics Certificate:',                     files: [{ label: '📥 Download Networking Basics Certificate',   url: FILES.networking }] },
+  certOS:            { text: '📜 Operating Systems Basics Certificate:',              files: [{ label: '📥 Download Operating Systems Certificate',   url: FILES.os }] },
+  
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   help: {
     text: `I can help with:
 
+<<<<<<< HEAD
 • Pitso's background and journey from Sephukubje Village
+=======
+• Pitso's background and journey from Sephukubje village
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
 • Skills and technologies
 • Professional experience
 • Featured projects
@@ -177,7 +296,11 @@ function getResponse(input: string): BotMessage {
   if (q.match(/^(hi|hello|hey|good morning|good afternoon|howzit)/)) return KNOWLEDGE.greeting;
   if (q.includes('help') || q === 'what can you do') return KNOWLEDGE.help;
 
+<<<<<<< HEAD
   //  Location / Origin keywords (new)
+=======
+  // ✅ Location / Origin keywords (new)
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   if (q.includes('village') || q.includes('sephukubje') || q.includes('sekgosese') || 
       q.includes('limpopo') || q.includes('johannesburg') || q.includes('location') || 
       q.includes('where') || q.includes('from') || q.includes('born') || q.includes('grew up') ||
@@ -224,12 +347,20 @@ function getResponse(input: string): BotMessage {
   if (q.includes('book') || q.includes('call') || q.includes('meeting') || q.includes('schedule')) return KNOWLEDGE.booking;
 
   return {
+<<<<<<< HEAD
     text: "I'm not sure about that. Try asking about Pitso's background (where he's from), skills, projects, experience, certifications, or how to book a call , I'm happy to help with any of those!",
+=======
+    text: "I'm not sure about that. Try asking about Pitso's background (where he's from), skills, projects, experience, certifications, or how to book a call — I'm happy to help with any of those!",
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
   };
 }
 
 // ── Suggestion chips ────────────────────────────────────────────────────────
+<<<<<<< HEAD
 //  Updated suggestions to include location
+=======
+// ✅ Updated suggestions to include location
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
 const SUGGESTIONS = [
   "Where is Pitso from?",
   "What are Pitso's skills?",
@@ -385,7 +516,11 @@ const Chatbot = () => {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#2563eb]" />
             </span>
             <span className="whitespace-nowrap text-xs font-medium text-zinc-700 dark:text-zinc-300">
+<<<<<<< HEAD
               Ask about Pitso
+=======
+              Ask about Pitso! 🌍
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
             </span>
             <button
               onClick={e => { e.stopPropagation(); setShowHint(false); }}
@@ -422,8 +557,13 @@ const Chatbot = () => {
         className={cn(
           'fixed bottom-24 right-6 z-50 flex flex-col',
           'w-[calc(100vw-3rem)] max-w-[380px] sm:max-w-[400px]',
+<<<<<<< HEAD
           'rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700',
           'bg-white dark:bg-[#111722] shadow-xl',
+=======
+          'rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700',
+          'bg-white dark:bg-zinc-900 shadow-2xl',
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
           'transition-all duration-300 origin-bottom-right',
           isOpen ? 'scale-100 opacity-100 pointer-events-auto' : 'scale-90 opacity-0 pointer-events-none'
         )}
@@ -436,8 +576,13 @@ const Chatbot = () => {
             <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-400 ring-2 ring-[#172033]" />
           </div>
           <div className="flex-1 min-w-0">
+<<<<<<< HEAD
             <p className="text-sm font-semibold text-white leading-tight">Portfolio Assistant</p>
             <p className="text-[11px] text-zinc-300">Skills, projects and experience</p>
+=======
+            <p className="text-sm font-semibold text-white leading-tight">Pitso's Assistant</p>
+            <p className="text-[11px] text-indigo-200">From Sephukubje to software dev</p>
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
           </div>
           <button onClick={clearChat} title="New chat" className="rounded-lg p-1.5 text-white/60 hover:bg-white/20 hover:text-white transition-colors">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -515,7 +660,11 @@ const Chatbot = () => {
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
+<<<<<<< HEAD
               placeholder="Ask about skills, projects or experience..."
+=======
+              placeholder="Ask about his journey, skills, projects..."
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
               disabled={isLoading}
               maxLength={300}
               className="flex-1 min-w-0 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3.5 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:border-transparent disabled:opacity-50 transition-all"
@@ -535,7 +684,11 @@ const Chatbot = () => {
               </svg>
             </button>
           </form>
+<<<<<<< HEAD
           <p className="mt-1.5 text-center text-[10px] text-zinc-400 dark:text-zinc-600">Portfolio assistant for recruiters and visitors</p>
+=======
+          <p className="mt-1.5 text-center text-[10px] text-zinc-400 dark:text-zinc-600">From Sephukubje village to building software</p>
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
         </div>
       </div>
     </>

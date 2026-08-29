@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import { useState, useEffect, useCallback, useRef, type MouseEvent } from 'react';
 import { Sun, Moon } from './icons';
+=======
+// src/components/Header.tsx
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Calendar, Sun, Moon } from './icons';
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
 import { cn } from '../lib/utils';
 import { useTheme } from '../contexts/ThemeContext';
 import PictureIcon from './ui/PictureIcon';
@@ -25,7 +31,15 @@ const Header = () => {
 
   const updateSectionHash = useCallback((id: string) => {
     if (typeof window !== 'undefined' && window.history.replaceState) {
+<<<<<<< HEAD
       window.history.replaceState(null, '', id === 'home' ? '/' : `#${id}`);
+=======
+      if (id === 'home') {
+        window.history.replaceState(null, '', '/');
+      } else {
+        window.history.replaceState(null, '', `#${id}`);
+      }
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
     }
   }, []);
 
@@ -38,10 +52,24 @@ const Header = () => {
       const top = el.getBoundingClientRect().top + window.scrollY;
       if (scrollPos >= top) current = item.id;
     }
+<<<<<<< HEAD
     if (current !== activeSectionRef.current) {
       activeSectionRef.current = current;
       setActiveSection(current);
       if (!skipHashSync.current) updateSectionHash(current);
+=======
+
+    if (current !== activeSectionRef.current) {
+      activeSectionRef.current = current;
+      setActiveSection(current);
+      // Keep the URL's hash matching what's actually on screen, so it can
+      // never get permanently stuck on a section you've scrolled away
+      // from. Skip the very first call so we don't fight a deep-link
+      // (e.g. someone opening the site straight to #contact).
+      if (!skipHashSync.current) {
+        updateSectionHash(current);
+      }
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
     }
     skipHashSync.current = false;
   }, [updateSectionHash]);
@@ -70,7 +98,21 @@ const Header = () => {
     };
   }, [updateActiveSection]);
 
+<<<<<<< HEAD
   const navigateToSection = (e: MouseEvent<HTMLElement>, id: string) => {
+=======
+  const scrollToSectionId = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
+  const navigateToSection = (e: React.MouseEvent<HTMLElement>, id: string) => {
+>>>>>>> 0f457241666c47c91735386dafd40a9f6f9e76bb
     e.preventDefault();
     setActiveSection(id);
     activeSectionRef.current = id;
