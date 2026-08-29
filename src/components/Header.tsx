@@ -106,7 +106,7 @@ const Header = () => {
 
   return (
     <header className={cn(
-      'fixed inset-x-0 top-0 z-50 border-b border-[#e4e7eb] bg-white/95 backdrop-blur-sm dark:border-[#252d39] dark:bg-[#0b0f17]/95',
+      'fixed inset-x-0 top-0 z-50 border-b border-[#e4e7eb] bg-white dark:border-[#252d39] dark:bg-[#0b0f17]',
       'transition-shadow duration-200',
       scrolled ? 'shadow-[0_4px_18px_rgba(15,23,42,0.06)]' : 'shadow-none'
     )}>
@@ -159,7 +159,14 @@ const Header = () => {
           </button>
         </div>
 
-        <div className={cn('fixed inset-x-0 bottom-0 top-[4.5rem] z-40 bg-white px-5 py-5 transition-transform dark:bg-[#0b0f17] xl:hidden', mobileMenuOpen ? 'translate-x-0' : 'translate-x-full')}>
+        <div
+          className={cn(
+            'fixed inset-x-0 bottom-0 top-[4.5rem] z-[60] overflow-y-auto border-t border-[#e4e7eb] bg-white px-5 py-5 shadow-[0_18px_50px_rgba(15,23,42,0.18)] transition-transform duration-200 dark:border-[#252d39] dark:bg-[#0b0f17] xl:hidden',
+            mobileMenuOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
+          )}
+          style={{ backgroundColor: theme === 'dark' ? '#0b0f17' : '#ffffff' }}
+          aria-hidden={!mobileMenuOpen}
+        >
           <div className="mx-auto flex max-w-xl flex-col gap-1">
             {navItems.map((item) => (
               <a key={item.id} href={`#${item.id}`} onClick={(e) => navigateToSection(e, item.id)} className={cn('rounded-md px-4 py-3 text-base font-medium transition-colors', activeSection === item.id ? 'bg-[#eff6ff] text-[#172033] dark:bg-[#1a2230] dark:text-white' : 'text-[#58616f] hover:bg-[#f5f6f7] dark:text-zinc-300 dark:hover:bg-[#171e2a]')}>
