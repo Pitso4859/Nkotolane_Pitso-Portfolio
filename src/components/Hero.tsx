@@ -35,10 +35,10 @@ const Hero = () => {
             I grew up in Sephukubje Village in Limpopo. That background taught me resourcefulness, persistence and the value of learning independently, qualities I bring into every project I work on.
           </p>
 
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-7 flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap">
             <PrimaryButton href="#projects" onClick={(e) => handleSectionNavClick(e, 'projects')}>View projects <ArrowRight className="h-4 w-4" /></PrimaryButton>
-            <a href="#booking-section" onClick={handleBookCall} className={cn(secondaryButton)}><PictureIcon surface="transparent" src="/icon-logo/calendar.png" size="xs" imageClassName="dark:brightness-0 dark:invert" /> Book a call</a>
-            <a href="/Files/NKOTOLANE PITSO GINTOS RESUME.pdf" download="Pitso_Nkotolane_CV.pdf" className="inline-flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-sm font-semibold text-[#58616f] transition-colors hover:bg-[#eceef1] hover:text-[#172033] dark:text-zinc-300 dark:hover:bg-[#171e2a] dark:hover:text-white"><PictureIcon surface="transparent" src="/icon-logo/download_logo.png" size="sm" /> Download CV</a>
+            <a href="#booking-section" onClick={handleBookCall} className={cn(secondaryButton, 'w-full sm:w-auto')}><PictureIcon surface="transparent" src="/icon-logo/calendar.png" size="xs" imageClassName="dark:brightness-0 dark:invert" /> Book a call</a>
+            <a href="/Files/NKOTOLANE PITSO GINTOS RESUME.pdf" download="Pitso_Nkotolane_CV.pdf" className="inline-flex w-full min-w-0 items-center justify-center gap-2 rounded-md px-3 py-2.5 text-sm font-semibold text-[#58616f] transition-colors hover:bg-[#eceef1] hover:text-[#172033] dark:text-zinc-300 dark:hover:bg-[#171e2a] dark:hover:text-white sm:w-auto"><PictureIcon surface="transparent" src="/icon-logo/download_logo.png" size="sm" className="shrink-0" /> <span className="whitespace-nowrap">Download CV</span></a>
           </div>
 
           <div className="mt-7 flex flex-wrap items-center gap-4 text-sm text-[#66707d] dark:text-zinc-400">

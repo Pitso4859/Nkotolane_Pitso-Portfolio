@@ -103,10 +103,10 @@ export default function Footer() {
             <div className="mt-4 space-y-3.5 text-sm">
               <a
                 href="mailto:pnkotolane@gmail.com"
-                className="flex items-start gap-3 text-[#c7ced8] transition-colors hover:text-white"
+                className="flex min-w-0 items-start gap-3 text-[#c7ced8] transition-colors hover:text-white"
               >
                 <PictureIcon surface="transparent" src="/icon-logo/email_logo.png" size="sm" className="mt-0.5" />
-                <span className="pt-1">pnkotolane@gmail.com</span>
+                <span className="min-w-0 break-all pt-1 sm:break-normal">pnkotolane@gmail.com</span>
               </a>
               <a
                 href="tel:+27638654343"
@@ -121,7 +121,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-2">
+            <div className="mt-6 flex flex-wrap items-center gap-2">
               {socialLinks.map((link) => (
                 <a
                   key={link.href}

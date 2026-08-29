@@ -63,3 +63,30 @@
 .dark ::-webkit-scrollbar-track { background: #111722; }
 ::-webkit-scrollbar-thumb { background: #a6adb7; border-radius: 6px; }
 .dark ::-webkit-scrollbar-thumb { background: #4b5563; }
+
+/* Mobile resilience: prevent cards, buttons and media from overflowing narrow viewports. */
+@media (max-width: 639px) {
+  .section-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  main,
+  section,
+  article,
+  nav,
+  footer,
+  form,
+  dl,
+  ul,
+  li {
+    min-width: 0;
+  }
+}

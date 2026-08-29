@@ -238,10 +238,10 @@ const Booking = () => {
           <h2 className="section-title mx-auto mt-2">Book a call directly from my portfolio.</h2>
           <p className="section-copy mx-auto mt-3">Choose a meeting type, date and time. Recruiters and collaborators can use this page to speak with me directly.</p>
         </div>
-        <div className="mx-auto w-full max-w-lg rounded-xl border border-[#e0e3e7] bg-white p-5 shadow-[0_8px_26px_rgba(15,23,42,0.05)] dark:border-[#2b3441] dark:bg-[#111722] sm:p-6">
+        <div className="mx-auto w-full min-w-0 max-w-lg rounded-xl border border-[#e0e3e7] bg-white p-4 shadow-[0_8px_26px_rgba(15,23,42,0.05)] dark:border-[#2b3441] dark:bg-[#111722] sm:p-6">
         
         {/* Meeting type cards with clear picture icons */}
-        <div className="mb-4 grid grid-cols-3 gap-2">
+        <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-3">
           {bookingOptions.map((option) => {
             const isSelected = selectedType === option.id;
             return (
@@ -266,7 +266,7 @@ const Booking = () => {
         </div>
 
         {/* Duration and Platform - Small row */}
-        <div className="flex justify-center gap-2 mb-4">
+        <div className="mb-4 flex min-w-0 flex-wrap justify-center gap-2">
           <div className="flex gap-1 rounded-md bg-[#eef0f2] dark:bg-[#1a2230] p-0.5">
             {bookingOptions.find(o => o.id === selectedType)?.durations.map((dur) => (
               <button

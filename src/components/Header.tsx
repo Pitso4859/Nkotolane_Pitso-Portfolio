@@ -111,11 +111,11 @@ const Header = () => {
       scrolled ? 'shadow-[0_4px_18px_rgba(15,23,42,0.06)]' : 'shadow-none'
     )}>
       <nav className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
-        <a href="#home" onClick={(e) => navigateToSection(e, 'home')} className="flex items-center gap-3" aria-label="Go to home">
+        <a href="#home" onClick={(e) => navigateToSection(e, 'home')} className="flex min-w-0 items-center gap-2.5 sm:gap-3" aria-label="Go to home">
           <img src="/favicon-48x48.png" alt="" className="h-9 w-9 rounded-md object-cover" />
-          <span>
-            <span className="block text-sm font-semibold text-[#172033] dark:text-white">Pitso Nkotolane</span>
-            <span className="block text-[11px] text-[#727b88] dark:text-zinc-400">Software Developer</span>
+          <span className="min-w-0">
+            <span className="block truncate text-sm font-semibold text-[#172033] dark:text-white">Pitso Nkotolane</span>
+            <span className="block truncate text-[11px] text-[#727b88] dark:text-zinc-400">Software Developer</span>
           </span>
         </a>
 
@@ -148,7 +148,7 @@ const Header = () => {
           </a>
         </div>
 
-        <div className="flex items-center gap-1 xl:hidden">
+        <div className="ml-2 flex shrink-0 items-center gap-1 xl:hidden">
           <button onClick={toggleTheme} className="rounded-md p-2 text-[#626b78] hover:bg-[#f2f3f5] dark:text-zinc-400 dark:hover:bg-[#171e2a]" aria-label="Toggle theme">
             {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
