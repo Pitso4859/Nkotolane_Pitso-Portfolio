@@ -1,14 +1,14 @@
-// src/components/Header.tsx
-import { useState, useEffect, useCallback } from 'react';
-import { Calendar, Sun, Moon } from './icons';
+import { useState, useEffect, useCallback, useRef, type MouseEvent } from 'react';
+import { Sun, Moon } from './icons';
 import { cn } from '../lib/utils';
 import { useTheme } from '../contexts/ThemeContext';
+import PictureIcon from './ui/PictureIcon';
 
 const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
-  { id: 'soft-skills', label: 'Soft Skills' },
+  { id: 'soft-skills', label: 'How I work' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'certificates', label: 'Certificates' },
@@ -20,101 +20,107 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const activeSectionRef = useRef('home');
+  const skipHashSync = useRef(true);
+
+  const updateSectionHash = useCallback((id: string) => {
+    if (typeof window !== 'undefined' && window.history.replaceState) {
+      window.history.replaceState(null, '', id === 'home' ? '/' : `#${id}`);
+    }
+  }, []);
 
   const updateActiveSection = useCallback(() => {
-    const offset = 100;
-    const scrollPos = window.scrollY + offset;
+    const scrollPos = window.scrollY + 100;
     let current = 'home';
-
     for (const item of navItems) {
       const el = document.getElementById(item.id);
       if (!el) continue;
       const top = el.getBoundingClientRect().top + window.scrollY;
       if (scrollPos >= top) current = item.id;
     }
-
-    setActiveSection(current);
-  }, []);
+    if (current !== activeSectionRef.current) {
+      activeSectionRef.current = current;
+      setActiveSection(current);
+      if (!skipHashSync.current) updateSectionHash(current);
+    }
+    skipHashSync.current = false;
+  }, [updateSectionHash]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frameId = 0;
+
+    const updateHeaderState = () => {
+      frameId = 0;
       updateActiveSection();
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 8);
     };
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', updateActiveSection);
+    const scheduleHeaderUpdate = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(updateHeaderState);
+    };
 
+    updateHeaderState();
+    window.addEventListener('scroll', scheduleHeaderUpdate, { passive: true });
+    window.addEventListener('resize', scheduleHeaderUpdate);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', updateActiveSection);
+      window.removeEventListener('scroll', scheduleHeaderUpdate);
+      window.removeEventListener('resize', scheduleHeaderUpdate);
+      if (frameId) window.cancelAnimationFrame(frameId);
     };
   }, [updateActiveSection]);
 
-  const scrollToSectionId = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
-  };
-
-  const updateSectionHash = (id: string) => {
-    if (typeof window !== 'undefined' && window.history.replaceState) {
-      if (id === 'home') {
-        window.history.replaceState(null, '', '/');
-      } else {
-        window.history.replaceState(null, '', `#${id}`);
-      }
-    }
-  };
-
-  const navigateToSection = (e: React.MouseEvent<HTMLElement>, id: string) => {
+  const navigateToSection = (e: MouseEvent<HTMLElement>, id: string) => {
     e.preventDefault();
     setActiveSection(id);
+    activeSectionRef.current = id;
     setMobileMenuOpen(false);
-    scrollToSectionId(id);
+    document.body.style.overflow = '';
+    const element = document.getElementById(id);
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
     updateSectionHash(id);
   };
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-    if (!mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+  const goToBooking = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    document.body.style.overflow = '';
+    const element = document.getElementById('booking-section');
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((open) => {
+      document.body.style.overflow = open ? '' : 'hidden';
+      return !open;
+    });
+  };
+
+  useEffect(() => () => { document.body.style.overflow = ''; }, []);
 
   return (
     <header className={cn(
-      'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-      'bg-white dark:bg-zinc-900',
-      'border-b border-zinc-200 dark:border-zinc-800',
-      scrolled ? 'shadow-md' : 'shadow-sm'
+      'fixed inset-x-0 top-0 z-50 border-b border-[#e4e7eb] bg-white/95 backdrop-blur-sm dark:border-[#252d39] dark:bg-[#0b0f17]/95',
+      'transition-shadow duration-200',
+      scrolled ? 'shadow-[0_4px_18px_rgba(15,23,42,0.06)]' : 'shadow-none'
     )}>
-      <nav className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
-        {/* Logo */}
-        <a
-          href="#home"
-          onClick={(e) => navigateToSection(e, 'home')}
-          className="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-        >
-          P<span className="text-zinc-800 dark:text-zinc-200 bg-none">.Nkotolane</span>
+      <nav className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
+        <a href="#home" onClick={(e) => navigateToSection(e, 'home')} className="flex items-center gap-3" aria-label="Go to home">
+          <img src="/favicon-48x48.png" alt="" className="h-9 w-9 rounded-md object-cover" />
+          <span>
+            <span className="block text-sm font-semibold text-[#172033] dark:text-white">Pitso Nkotolane</span>
+            <span className="block text-[11px] text-[#727b88] dark:text-zinc-400">Software Developer</span>
+          </span>
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden items-center gap-1 md:flex lg:gap-1.5">
-          {navItems.map((item) => {
+        <div className="hidden items-center gap-1 xl:flex">
+          {navItems.slice(1).map((item) => {
             const isActive = activeSection === item.id;
             return (
               <a
@@ -123,132 +129,46 @@ const Header = () => {
                 onClick={(e) => navigateToSection(e, item.id)}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  'relative rounded-lg px-3.5 py-2.5 text-sm font-medium transition-all duration-300 lg:px-4',
-                  isActive 
-                    ? 'text-indigo-600 dark:text-indigo-400' 
-                    : 'text-zinc-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30'
+                  'border-b-2 px-2.5 py-2 text-[13px] font-medium transition-colors',
+                  isActive
+                    ? 'border-[#2563eb] text-[#172033] dark:text-white'
+                    : 'border-transparent text-[#626b78] hover:text-[#172033] dark:text-zinc-400 dark:hover:text-white'
                 )}
               >
-                {isActive && (
-                  <span
-                    className="absolute inset-0 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 ring-1 ring-indigo-200 dark:ring-indigo-800/50"
-                    aria-hidden
-                  />
-                )}
-                <span className="relative z-10">{item.label}</span>
+                {item.label}
               </a>
             );
           })}
-          
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          <button onClick={toggleTheme} className="ml-1 rounded-md p-2 text-[#626b78] transition-colors hover:bg-[#f2f3f5] hover:text-[#172033] dark:text-zinc-400 dark:hover:bg-[#171e2a] dark:hover:text-white" aria-label="Toggle theme">
+            {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
           </button>
-
-          <a
-            href="#booking-section"
-            onClick={(e) => {
-              e.preventDefault();
-              setMobileMenuOpen(false);
-              const element = document.getElementById('booking-section');
-              if (element) {
-                const offset = 80;
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.scrollY - offset;
-                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-              }
-            }}
-            className="ml-1 lg:ml-2 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-          >
-            <Calendar className="h-4 w-4" />
-            Book a Call
+          <a href="#booking-section" onClick={goToBooking} className="ml-2 inline-flex items-center gap-2 rounded-md bg-[#172033] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0f172a] dark:bg-[#3b82f6] dark:text-white dark:hover:bg-[#2563eb]">
+            <PictureIcon surface="transparent" src="/icon-logo/calendar.png" size="xs" imageClassName="brightness-0 invert" />
+            Book a call
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-2 md:hidden">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-colors"
-            aria-label="Toggle theme"
-          >
+        <div className="flex items-center gap-1 xl:hidden">
+          <button onClick={toggleTheme} className="rounded-md p-2 text-[#626b78] hover:bg-[#f2f3f5] dark:text-zinc-400 dark:hover:bg-[#171e2a]" aria-label="Toggle theme">
             {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
-          
-          <button
-            onClick={toggleMobileMenu}
-            className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5"
-            aria-label="Toggle menu"
-          >
-            <span
-              className={cn(
-                'h-0.5 w-5 bg-zinc-800 dark:bg-zinc-200 transition-all duration-300',
-                mobileMenuOpen && 'rotate-45 translate-y-2'
-              )}
-            />
-            <span
-              className={cn(
-                'h-0.5 w-5 bg-zinc-800 dark:bg-zinc-200 transition-all duration-300',
-                mobileMenuOpen && 'opacity-0'
-              )}
-            />
-            <span
-              className={cn(
-                'h-0.5 w-5 bg-zinc-800 dark:bg-zinc-200 transition-all duration-300',
-                mobileMenuOpen && '-rotate-45 -translate-y-2'
-              )}
-            />
+          <button onClick={toggleMobileMenu} className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md hover:bg-[#f2f3f5] dark:hover:bg-[#171e2a]" aria-label="Toggle menu">
+            <span className={cn('h-0.5 w-5 bg-[#172033] transition-all dark:bg-zinc-200', mobileMenuOpen && 'translate-y-2 rotate-45')} />
+            <span className={cn('h-0.5 w-5 bg-[#172033] transition-all dark:bg-zinc-200', mobileMenuOpen && 'opacity-0')} />
+            <span className={cn('h-0.5 w-5 bg-[#172033] transition-all dark:bg-zinc-200', mobileMenuOpen && '-translate-y-2 -rotate-45')} />
           </button>
         </div>
 
-        {/* Mobile Navigation Overlay */}
-        <div
-          className={cn(
-            'fixed inset-0 z-40 bg-white dark:bg-zinc-900 transition-transform duration-300 md:hidden',
-            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          )}
-          style={{ top: '4.5rem' }}
-        >
-          <div className="flex flex-col p-6 gap-2">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={(e) => navigateToSection(e, item.id)}
-                  className={cn(
-                    'rounded-lg px-4 py-3 text-base font-medium transition-colors',
-                    isActive
-                      ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:text-indigo-600 dark:hover:text-indigo-400'
-                  )}
-                >
-                  {item.label}
-                </a>
-              );
-            })}
-            <a
-              href="#booking-section"
-              onClick={(e) => {
-                e.preventDefault();
-                setMobileMenuOpen(false);
-                const element = document.getElementById('booking-section');
-                if (element) {
-                  const offset = 80;
-                  const elementPosition = element.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.scrollY - offset;
-                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                }
-              }}
-              className="mt-4 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-center text-base font-semibold text-white flex items-center justify-center gap-2"
-            >
-              <Calendar className="h-4 w-4" />
-              Book a Call
+        <div className={cn('fixed inset-x-0 bottom-0 top-[4.5rem] z-40 bg-white px-5 py-5 transition-transform dark:bg-[#0b0f17] xl:hidden', mobileMenuOpen ? 'translate-x-0' : 'translate-x-full')}>
+          <div className="mx-auto flex max-w-xl flex-col gap-1">
+            {navItems.map((item) => (
+              <a key={item.id} href={`#${item.id}`} onClick={(e) => navigateToSection(e, item.id)} className={cn('rounded-md px-4 py-3 text-base font-medium transition-colors', activeSection === item.id ? 'bg-[#eff6ff] text-[#172033] dark:bg-[#1a2230] dark:text-white' : 'text-[#58616f] hover:bg-[#f5f6f7] dark:text-zinc-300 dark:hover:bg-[#171e2a]')}>
+                {item.label}
+              </a>
+            ))}
+            <a href="#booking-section" onClick={goToBooking} className="mt-3 flex items-center justify-center gap-2 rounded-md bg-[#172033] px-4 py-3 text-base font-semibold text-white dark:bg-[#3b82f6] dark:text-white">
+              <PictureIcon surface="transparent" src="/icon-logo/calendar.png" size="xs" imageClassName="brightness-0 invert" />
+              Book a call
             </a>
           </div>
         </div>

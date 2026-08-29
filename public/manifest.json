@@ -1,21 +1,27 @@
 {
   "name": "Pitso Nkotolane - Software Developer",
-  "short_name": "PitsoDev",
+  "short_name": "Pitso",
   "description": "Portfolio of Pitso Nkotolane, a Software Developer specializing in Java, Spring Boot, React, and cloud technologies.",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#242526",
+  "theme_color": "#172033",
   "background_color": "#ffffff",
   "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
     {
       "src": "/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png"
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/apple-touch-icon.png",

@@ -1,15 +1,5 @@
-export type ProjectLink = {
-  label: string;
-  href: string;
-  download?: boolean;
-};
-
-export type DemoCredential = {
-  role: string;
-  email: string;
-  password: string;
-};
-
+export type ProjectLink = { label: string; href: string; download?: boolean };
+export type DemoCredential = { role: string; email: string; password: string };
 export type Project = {
   title: string;
   tagline: string;
@@ -30,108 +20,53 @@ export const projects: Project[] = [
   {
     title: 'GIGConnectSA',
     tagline: 'FNB Hackathon Project',
-    description: 'A mobile-first marketplace connecting informal workers with clients in South Africa. Built as part of an FNB hackathon with Spring Boot 3, React 18, Gemini AI, and PostgreSQL.',
-    detailedDescription: `GIGConnect SA is a comprehensive digital marketplace that bridges the gap between informal workers and clients across South Africa. The platform features AI-powered job matching, secure escrow payments, and a sophisticated rating system.
-
-Key achievements:
-• 40% faster job matching using Gemini AI
-• Secure escrow payment system with wallet functionality
-• Real-time chat and job tracking
-• Deployed on Render.com with 99.9% uptime`,
+    description: 'A marketplace that connects informal workers with clients and supports job discovery, communication, proof submission and payments.',
+    detailedDescription: 'GIGConnectSA is a marketplace designed around the needs of informal workers and clients in South Africa. I worked across the application architecture, backend services, frontend integration, authentication and deployment.',
     stack: ['Spring Boot 3', 'React 18', 'TypeScript', 'PostgreSQL', 'Gemini AI', 'Docker', 'JWT', 'Redis'],
-    features: [
-      'AI-powered job matching with Gemini 1.5 Flash',
-      'Secure escrow payments with wallet system',
-      'Real-time chat and job tracking',
-      'Worker leaderboard with ELITE/GOLD/SILVER badges',
-      'Proof submission with GPS location',
-      'JWT authentication with refresh token rotation',
-    ],
-    role: 'Lead Full-Stack Developer - Architected the microservices architecture, implemented Spring Boot backend with JWT security, integrated Gemini AI for intelligent job matching, and deployed on Render with CI/CD pipeline.',
-    thumbnail: '/images/projects/GIGConnect.png',
-    thumbnailAlt: 'GIGConnectSA login screen - informal worker marketplace',
+    features: ['Job matching and worker discovery', 'Wallet and escrow workflow', 'Real time chat and job tracking', 'JWT authentication and role based access'],
+    role: 'Full Stack Developer. Worked on application architecture, Spring Boot services, security, AI integration and deployment.',
+    thumbnail: '/images/projects/GIGConnect.webp',
+    thumbnailAlt: 'GIGConnectSA application interface',
     thumbnailVariant: 'full',
-    links: [
-      {
-        label: 'Live Demo',
-        href: 'https://gigconnectsa.onrender.com',
-      },
-      {
-        label: 'View Code',
-        href: 'https://github.com/Pitso4859/GIGConnectSASkill.git',
-      },
-    ],
-    // No credentials - users create their own account
+    links: [{ label: 'Live Demo', href: 'https://gigconnectsa.onrender.com' }, { label: 'GitHub', href: 'https://github.com/Pitso4859/GIGConnectSASkill.git' }],
   },
   {
-    title: 'Thusa AI Assistant',
-    tagline: 'TUT Student Assistant',
-    description: 'AI-powered student support assistant for Tshwane University of Technology — grounded chat with hybrid FAQ retrieval.',
-    stack: ['React', 'TypeScript', 'Vite', 'Node.js', 'Express', 'OpenAI', 'PostgreSQL'],
-    features: [
-      'Streaming chat with database-grounded answers',
-      'Conversation memory with relevance filtering',
-      'Hybrid FAQ search across programmes & admissions',
-      'Scheduled agent for weekly TUT updates',
-    ],
-    role: 'Full-Stack AI Developer - Built the chat interface, integrated OpenAI API, and implemented the RAG system for FAQ retrieval.',
-    thumbnail: '/images/projects/thusa.png',
-    thumbnailAlt: 'Thusa AI Assistant chat interface',
+    title: 'FinTrackPro',
+    tagline: 'Accounting Platform',
+    description: 'A South African accounting application for transaction management, VAT tracking, reporting and assisted invoice analysis.',
+    detailedDescription: 'FinTrackPro is a full stack accounting platform for small business workflows. I built backend services and frontend screens, connected financial data to reporting features and integrated invoice analysis.',
+    stack: ['Spring Boot 3', 'React', 'TypeScript', 'PostgreSQL', 'Gemini AI', 'JWT', 'Docker'],
+    features: ['VAT and tax reporting workflows', 'Invoice analysis', 'Financial dashboard', 'Secure access for multiple users'],
+    role: 'Full Stack Developer. Built backend services and frontend screens, integrated invoice analysis and implemented tax reporting features.',
+    thumbnail: '/images/projects/fintrack.webp',
+    thumbnailAlt: 'FinTrackPro application interface',
     thumbnailVariant: 'desktop',
-    links: [
-      {
-        label: 'Live Demo',
-        href: 'https://thusa-tut-ai-chatbot.vercel.app',
-      },
-      {
-        label: 'View Code',
-        href: 'https://github.com/Pitso4859/thusa-ai-assistant.git',
-      },
-    ],
+    links: [{ label: 'Live Demo', href: 'https://fintrack-app-ytot.onrender.com' }, { label: 'API', href: 'https://fintrack-api-aw96.onrender.com' }],
   },
   {
-    title: 'OnSite Municipality',
-    tagline: 'Municipality Maintenance',
-    description: 'AI-powered maintenance and employment system with incident reporting, classification, and worker assignment.',
-    stack: ['React', 'Flutter', 'Firebase Auth', 'Firestore', 'Cloud Functions', 'TensorFlow'],
-    features: [
-      'Image-based incident reporting',
-      'Worker assignment algorithm',
-      'Event-driven Cloud Functions',
-      'Real-time status updates',
-    ],
-    role: 'Lead Developer - Architected the system, implemented image classification, and built the worker assignment algorithm.',
-    thumbnail: '/images/projects/onsite.png',
-    thumbnailAlt: 'OnSite Municipality app interface',
-    thumbnailVariant: 'mobile',
-    links: [
-      {
-        label: 'View Code',
-        href: 'https://github.com/Pitso4859/onsite-municipality.git',
-      },
-    ],
-    downloadApk: '/apk/onsite-municipality.apk',
-  },
-  {
-    title: 'AI Credit Card Fraud Detection',
-    tagline: 'Machine Learning',
-    description: 'ML pipeline detecting real-time fraudulent transactions with 94% accuracy using Python and scikit-learn.',
-    stack: ['Python', 'scikit-learn', 'pandas', 'NumPy', 'XGBoost', 'SHAP'],
-    features: [
-      'Real-time fraud detection',
-      '94% model accuracy',
-      'Feature engineering with SMOTE',
-      'Model explainability with SHAP',
-    ],
-    role: 'ML Engineer - Developed the fraud detection pipeline, performed feature engineering, and optimized model performance.',
+    title: 'Mavuti Health Platform',
+    tagline: 'Clinic Management Platform',
+    description: 'A clinic management application for appointment booking, slot availability, role based access and patient communication.',
+    detailedDescription: 'Mavuti Health Platform is a clinic management application with separate workflows for patients, staff and administrators. I implemented appointment booking logic, authentication, backend APIs, frontend flows, notifications and deployment configuration.',
+    stack: ['Spring Boot 3', 'Java 21', 'React 19', 'PostgreSQL', 'Redis', 'Docker', 'JWT', 'Gemini AI'],
+    features: ['Appointment booking and capacity rules', 'Role based authentication', 'Email notifications', 'Container based deployment'],
+    role: 'Full Stack Developer. Implemented booking logic, backend APIs, frontend workflows, authentication and deployment configuration.',
+    thumbnail: '/images/projects/mavuti.webp',
+    thumbnailAlt: 'Mavuti Health Platform application interface',
     thumbnailVariant: 'desktop',
-    thumbnail: '/images/projects/fraud-detection.png',
-    thumbnailAlt: 'Fraud detection dashboard',
-    links: [
-      {
-        label: 'View Code',
-        href: 'https://github.com/BA-3-2-Mavuti/Credit-Card-Fraud-Detection.git',
-      },
-    ],
+    links: [{ label: 'Live Demo', href: 'https://mavuti-health.onrender.com' }, { label: 'API', href: 'https://mavuti-api.onrender.com' }, { label: 'GitHub', href: 'https://github.com/Pitso4859/mavuti-health-platform.git' }],
+  },
+  {
+    title: 'Credit Card Fraud Detection',
+    tagline: 'Machine Learning Project',
+    description: 'A Python machine learning workflow for identifying suspicious card transactions and comparing model performance.',
+    detailedDescription: 'This project explores fraud detection on an imbalanced transaction dataset. I prepared the data pipeline, applied SMOTE, trained baseline and tree based models, evaluated classification results and built an interactive Gradio prediction interface.',
+    stack: ['Python', 'pandas', 'scikit learn', 'SMOTE', 'Random Forest', 'Gradio'],
+    features: ['Data preprocessing', 'Class imbalance handling', 'Model training and evaluation', 'Interactive prediction interface'],
+    role: 'Machine Learning Developer. Prepared the data pipeline, trained models, evaluated results and built the prediction interface.',
+    thumbnail: '/images/projects/fraud-detection.webp',
+    thumbnailAlt: 'Credit card fraud detection project interface',
+    thumbnailVariant: 'desktop',
+    links: [{ label: 'GitHub', href: 'https://github.com/BA-3-2-Mavuti/Credit-Card-Fraud-Detection.git' }],
   },
 ];

@@ -67,7 +67,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen w-full overflow-x-hidden bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 antialiased">
+      <div className="min-h-screen w-full overflow-x-hidden bg-white dark:bg-[#0b0f17] text-[#4f5967] dark:text-zinc-300 antialiased">
         <Header />
         <main>
           <Hero />

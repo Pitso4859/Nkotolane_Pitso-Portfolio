@@ -1,25 +1,25 @@
 // src/components/Booking.tsx
-import { Clock, Video, BookOpen } from './icons';
 import { cn } from '../lib/utils';
 import { useState } from 'react';
 import { sendBookingEmails } from '../services/emailService';
+import PictureIcon from './ui/PictureIcon';
 
 type BookingType = 'call' | 'meeting' | 'mentorship';
 
 // Timezone list with UTC offsets
 const TIMEZONES = [
-  { value: 'Africa/Johannesburg', label: 'South Africa (GMT+2)', offset: '+02:00' },
-  { value: 'America/New_York', label: 'USA - Eastern Time (GMT-4)', offset: '-04:00' },
-  { value: 'America/Los_Angeles', label: 'USA - Pacific Time (GMT-7)', offset: '-07:00' },
-  { value: 'Europe/London', label: 'United Kingdom (GMT+1)', offset: '+01:00' },
-  { value: 'Europe/Paris', label: 'Central Europe (GMT+2)', offset: '+02:00' },
-  { value: 'Asia/Dubai', label: 'UAE / Dubai (GMT+4)', offset: '+04:00' },
-  { value: 'Asia/Shanghai', label: 'China (GMT+8)', offset: '+08:00' },
-  { value: 'Asia/Tokyo', label: 'Japan (GMT+9)', offset: '+09:00' },
-  { value: 'Asia/Singapore', label: 'Singapore (GMT+8)', offset: '+08:00' },
-  { value: 'Australia/Sydney', label: 'Australia (GMT+10)', offset: '+10:00' },
-  { value: 'Pacific/Auckland', label: 'New Zealand (GMT+12)', offset: '+12:00' },
-  { value: 'Asia/Kolkata', label: 'India (GMT+5:30)', offset: '+05:30' },
+  { value: 'Africa/Johannesburg', label: 'South Africa (GMT +2)', offset: '+02:00' },
+  { value: 'America/New_York', label: 'USA Eastern Time (GMT 4)', offset: '-04:00' },
+  { value: 'America/Los_Angeles', label: 'USA Pacific Time (GMT 7)', offset: '-07:00' },
+  { value: 'Europe/London', label: 'United Kingdom (GMT +1)', offset: '+01:00' },
+  { value: 'Europe/Paris', label: 'Central Europe (GMT +2)', offset: '+02:00' },
+  { value: 'Asia/Dubai', label: 'UAE / Dubai (GMT +4)', offset: '+04:00' },
+  { value: 'Asia/Shanghai', label: 'China (GMT +8)', offset: '+08:00' },
+  { value: 'Asia/Tokyo', label: 'Japan (GMT +9)', offset: '+09:00' },
+  { value: 'Asia/Singapore', label: 'Singapore (GMT +8)', offset: '+08:00' },
+  { value: 'Australia/Sydney', label: 'Australia (GMT +10)', offset: '+10:00' },
+  { value: 'Pacific/Auckland', label: 'New Zealand (GMT +12)', offset: '+12:00' },
+  { value: 'Asia/Kolkata', label: 'India (GMT +5:30)', offset: '+05:30' },
 ];
 
 const Booking = () => {
@@ -38,21 +38,21 @@ const Booking = () => {
     {
       id: 'call' as const,
       title: 'Quick Call',
-      icon: Clock,
-      description: '15-30 min',
+      image: '/icon-logo/clock_logo.png',
+      description: '15 to 30 min',
       durations: ['15', '30'],
     },
     {
       id: 'meeting' as const,
       title: 'Meeting',
-      icon: Video,
-      description: '30-60 min',
+      image: '/icon-logo/meeting_logo.png',
+      description: '30 to 60 min',
       durations: ['30', '60'],
     },
     {
       id: 'mentorship' as const,
       title: 'Mentorship',
-      icon: BookOpen,
+      image: '/icon-logo/book_logo.png',
       description: '60 min',
       durations: ['60'],
     }
@@ -117,7 +117,7 @@ const Booking = () => {
   };
 
   const days = getDaysInMonth(currentMonth);
-  const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const availableTimeSlots = getAvailableTimeSlots(selectedDate);
 
   // Check if a day is selectable (not in the past)
@@ -177,7 +177,7 @@ const Booking = () => {
         platform: selectedPlatform,
         date: selectedDate,
         time: selectedTime,
-        timezone: timezone?.label || 'South Africa (GMT+2)',
+        timezone: timezone?.label || 'South Africa (GMT +2)',
       };
       
       try {
@@ -231,28 +231,35 @@ const Booking = () => {
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   return (
-    <section id="booking-section" className="py-8 overflow-x-hidden">
-      <div className="mx-auto w-full min-w-0 max-w-md px-4">
+    <section id="booking-section" className="section-padding border-t border-[#e4e7eb] bg-[#f6f7f8] dark:border-[#252d39] dark:bg-[#0e141e]">
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="mx-auto mb-7 max-w-2xl text-center">
+          <p className="section-kicker">Schedule a conversation</p>
+          <h2 className="section-title mx-auto mt-2">Book a call directly from my portfolio.</h2>
+          <p className="section-copy mx-auto mt-3">Choose a meeting type, date and time. Recruiters and collaborators can use this page to speak with me directly.</p>
+        </div>
+        <div className="mx-auto w-full max-w-lg rounded-xl border border-[#e0e3e7] bg-white p-5 shadow-[0_8px_26px_rgba(15,23,42,0.05)] dark:border-[#2b3441] dark:bg-[#111722] sm:p-6">
         
-        {/* Meeting Type - Small pills */}
-        <div className="flex gap-1.5 mb-3 justify-center">
+        {/* Meeting type cards with clear picture icons */}
+        <div className="mb-4 grid grid-cols-3 gap-2">
           {bookingOptions.map((option) => {
-            const Icon = option.icon;
             const isSelected = selectedType === option.id;
             return (
               <button
                 key={option.id}
                 onClick={() => setSelectedType(option.id)}
                 className={cn(
-                  'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs transition-all',
+                  'flex min-w-0 items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors',
                   isSelected
-                    ? 'bg-indigo-600 text-white shadow-sm'
-                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                    ? 'border-[#172033] bg-[#172033] text-white dark:border-[#3b82f6] dark:bg-[#3b82f6] dark:text-white'
+                    : 'border-[#e0e3e7] bg-[#f7f8fa] text-[#56606e] hover:bg-[#eef0f2] dark:border-[#303846] dark:bg-[#1a2230] dark:text-zinc-300 dark:hover:bg-[#202a39]'
                 )}
               >
-                <Icon className="h-3 w-3" />
-                <span>{option.title}</span>
-                <span className="text-[10px] opacity-70">{option.description}</span>
+                <PictureIcon surface="transparent" src={option.image} size="md" className="shrink-0" />
+                <span className="min-w-0">
+                  <span className="block truncate text-xs font-semibold">{option.title}</span>
+                  <span className="mt-0.5 block text-[10px] leading-3 opacity-75">{option.description}</span>
+                </span>
               </button>
             );
           })}
@@ -260,15 +267,15 @@ const Booking = () => {
 
         {/* Duration and Platform - Small row */}
         <div className="flex justify-center gap-2 mb-4">
-          <div className="flex gap-1 rounded-full bg-zinc-100 dark:bg-zinc-800 p-0.5">
+          <div className="flex gap-1 rounded-md bg-[#eef0f2] dark:bg-[#1a2230] p-0.5">
             {bookingOptions.find(o => o.id === selectedType)?.durations.map((dur) => (
               <button
                 key={dur}
                 onClick={() => setSelectedDuration(dur)}
                 className={cn(
-                  'px-3 py-1 text-xs rounded-full transition-all',
+                  'px-3 py-1 text-xs rounded-md transition-colors',
                   selectedDuration === dur
-                    ? 'bg-indigo-600 text-white'
+                    ? 'bg-[#172033] text-white dark:bg-[#3b82f6] dark:text-white'
                     : 'text-zinc-600 dark:text-zinc-400'
                 )}
               >
@@ -277,13 +284,13 @@ const Booking = () => {
             ))}
           </div>
           
-          <div className="flex gap-1 rounded-full bg-zinc-100 dark:bg-zinc-800 p-0.5">
+          <div className="flex gap-1 rounded-md bg-[#eef0f2] dark:bg-[#1a2230] p-0.5">
             <button
               onClick={() => setSelectedPlatform('google')}
               className={cn(
-                'px-3 py-1 text-xs rounded-full transition-all',
+                'px-3 py-1 text-xs rounded-md transition-colors',
                 selectedPlatform === 'google'
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-[#172033] text-white dark:bg-[#3b82f6] dark:text-white'
                   : 'text-zinc-600 dark:text-zinc-400'
               )}
             >
@@ -292,9 +299,9 @@ const Booking = () => {
             <button
               onClick={() => setSelectedPlatform('teams')}
               className={cn(
-                'px-3 py-1 text-xs rounded-full transition-all',
+                'px-3 py-1 text-xs rounded-md transition-colors',
                 selectedPlatform === 'teams'
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-[#172033] text-white dark:bg-[#3b82f6] dark:text-white'
                   : 'text-zinc-600 dark:text-zinc-400'
               )}
             >
@@ -308,7 +315,7 @@ const Booking = () => {
           <select
             value={selectedTimezone}
             onChange={(e) => setSelectedTimezone(e.target.value)}
-            className="w-full rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 text-xs text-zinc-700 dark:text-zinc-300 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 text-xs text-zinc-700 dark:text-zinc-300 focus:border-[#2563eb] focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
           >
             {TIMEZONES.map((tz) => (
               <option key={tz.value} value={tz.value}>
@@ -317,29 +324,29 @@ const Booking = () => {
             ))}
           </select>
           <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 text-center">
-            Your current timezone — meeting times will be converted to South Africa time (GMT+2)
+            Your current timezone. Meeting times will be converted to South Africa time (GMT +2)
           </p>
         </div>
 
         {/* Calendar - Compact like reference */}
-        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-[#111722] rounded-lg border border-[#e0e3e7] dark:border-[#303846] overflow-hidden shadow-sm">
           
           {/* Month header */}
           <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-100 dark:border-zinc-800">
             <button 
               onClick={prevMonth} 
-              className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded text-sm"
+              className="rounded-md border border-zinc-200 px-2.5 py-1 text-xs font-medium text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
-              ←
+              Prev
             </button>
             <span className="text-sm font-medium text-zinc-900 dark:text-white">
               {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
             </span>
             <button 
               onClick={nextMonth} 
-              className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded text-sm"
+              className="rounded-md border border-zinc-200 px-2.5 py-1 text-xs font-medium text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
-              →
+              Next
             </button>
           </div>
 
@@ -367,9 +374,9 @@ const Booking = () => {
                   disabled={!day || !isSelectable}
                   className={cn(
                     'h-8 w-full text-xs font-medium rounded-md transition-all',
-                    day && isSelectable && 'hover:bg-indigo-50 dark:hover:bg-indigo-900/30 cursor-pointer',
+                    day && isSelectable && 'hover:bg-[#eff6ff] dark:hover:bg-[#0f1b2d] cursor-pointer',
                     isSelected
-                      ? 'bg-indigo-600 text-white'
+                      ? 'bg-[#172033] text-white dark:bg-[#3b82f6] dark:text-white'
                       : day && isSelectable
                       ? 'text-zinc-900 dark:text-white'
                       : day && !isSelectable
@@ -401,7 +408,7 @@ const Booking = () => {
               <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mb-1.5">
                 {selectedDate.toLocaleDateString('default', { month: 'short', day: 'numeric' })}
                 {isToday(selectedDate) && (
-                  <span className="ml-1 text-indigo-600 dark:text-indigo-400">(Today)</span>
+                  <span className="ml-1 text-[#2563eb] dark:text-[#3b82f6]">(Today)</span>
                 )}
               </p>
               <div className="flex flex-wrap gap-1">
@@ -410,7 +417,7 @@ const Booking = () => {
                     <button
                       key={time}
                       onClick={() => handleTimeSelect(time)}
-                      className="px-2 py-0.5 rounded-md border border-zinc-200 dark:border-zinc-700 text-[10px] hover:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                      className="px-2 py-0.5 rounded-md border border-zinc-200 dark:border-zinc-700 text-[10px] hover:border-[#2563eb] hover:bg-[#eff6ff] dark:hover:bg-[#0f1b2d] transition-colors"
                     >
                       {time}
                     </button>
@@ -472,8 +479,8 @@ const Booking = () => {
                   className={cn(
                     'w-full rounded-lg py-1.5 text-xs text-white font-medium transition-all',
                     isSubmitting
-                      ? 'bg-indigo-400 cursor-not-allowed'
-                      : 'bg-indigo-600 hover:bg-indigo-700'
+                      ? 'bg-[#a7adb7] cursor-not-allowed'
+                      : 'bg-[#172033] hover:bg-[#0f172a] dark:bg-[#3b82f6] dark:text-white dark:hover:bg-[#2563eb]'
                   )}
                 >
                   {isSubmitting ? 'Sending...' : 'Confirm Booking'}
@@ -483,10 +490,11 @@ const Booking = () => {
           )}
         </div>
 
-        <div className="mt-3 text-center">
-          <p className="text-[10px] text-zinc-500 dark:text-zinc-400">
-            <a href="mailto:pnkotolane@gmail.com" className="text-indigo-600 hover:underline">pnkotolane@gmail.com</a>
+        <div className="mt-4 text-center">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            Questions before booking? <a href="mailto:pnkotolane@gmail.com" className="font-medium text-[#2563eb] hover:underline dark:text-[#3b82f6]">pnkotolane@gmail.com</a>
           </p>
+        </div>
         </div>
       </div>
     </section>

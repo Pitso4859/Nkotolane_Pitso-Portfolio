@@ -1,5 +1,5 @@
 // src/components/Chatbot.tsx
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, type FormEvent, type ReactNode } from 'react';
 import { cn } from '../lib/utils';
 
 // ── All certificate & file definitions ─────────────────────────────────────
@@ -54,111 +54,119 @@ interface Message {
 // ── Knowledge base ──────────────────────────────────────────────────────────
 const KNOWLEDGE: Record<string, BotMessage> = {
   greeting: {
-    text: "Hello! 👋 I'm Pitso's professional assistant. I can help you learn about his skills, experience, projects, and certifications — and you can download his resume or any certificate right here. What would you like to know?",
+    text: `Hello. I am Pitso's portfolio assistant.
+
+Pitso Nkotolane is a Software Developer from Sephukubje Village in Limpopo and is now based in Johannesburg, South Africa.
+
+I can help you review his skills, projects, experience, education, certificates, CV and contact details. What would you like to know?`,
+  },
+  location: {
+    text: `Pitso's background:
+
+• Grew up in Sephukubje Village in Limpopo
+• Now based in Johannesburg, Gauteng
+• Studied Information Technology at Vaal University of Technology
+• Building his career in software development
+
+Growing up in a small village shaped his resourcefulness, persistence and willingness to learn independently.`,
   },
   skills: {
     text: `Pitso's core technical skills:
 
-• Java (Spring Boot, Hibernate) — 88%
-• JavaScript / TypeScript (React, Node.js) — 85%
-• Python (ML, Data Analysis) — 78%
-• Databases (MySQL, PostgreSQL, MongoDB) — 87%
-• REST API Design — 90%
-• Cloud (Oracle Cloud, Azure, AWS) — 85%
-• DevOps (Docker, CI/CD) — 75%`,
+• Java with Spring Boot and Hibernate
+• React, TypeScript and JavaScript
+• Python for machine learning and data work
+• MySQL, PostgreSQL, MongoDB and Firebase
+• REST API design and backend development
+• Docker, Git, CI/CD and cloud fundamentals
+
+Java and Spring Boot are his strongest development focus.`,
   },
   experience: {
-    text: `Pitso's professional experience (2024 – Present):
+    text: `Pitso's current experience:
 
-• Improved page load time by 40%
-• Worked on production systems serving 10,000+ users
-• Contributed to AI-powered financial systems
-• Achieved 85% automated test coverage
-• Full-stack development with Java, Spring Boot & React
-• Agile / Scrum team collaboration`,
+• Contributes to customer facing software and AI enabled financial systems
+• Works on application performance, frontend behaviour and code quality
+• Uses automated testing and iterative Agile delivery
+• Supports deployment and maintenance of application features
+
+His portfolio also includes academic, hackathon and independent software projects.`,
   },
   projects: {
     text: `Pitso's featured projects:
 
-• GIGConnectSkill SA — FNB Hackathon mobile marketplace for informal workers (React Native, Expo, Firebase)
-• AI Credit Card Fraud Detection — ML pipeline with 94% accuracy (Python, scikit-learn, XGBoost)
-• Celse Academy Management System — Enterprise educational platform (Java, Spring Boot, MySQL)
-• VUT Eats — Campus food ordering platform (PHP, MySQL, JavaScript)
-• Clinic Management System — Healthcare system in development (Java, Spring Boot, React)
-• This Portfolio — React, TypeScript, Tailwind CSS with AI chatbot`,
+• GIGConnectSA, a marketplace for informal workers and clients
+• Mavuti Health Platform, a clinic management application
+• Credit Card Fraud Detection, a Python machine learning project
+• FinTrackPro, a South African accounting application
+• This portfolio, built with React, TypeScript and Tailwind CSS
+
+The project section includes live demos and source code where available.`,
   },
   education: {
     text: `Pitso's education:
 
-🎓 Advanced Diploma in Information Technology — TUT (In Progress, Expected Nov 2026)
-🎓 Diploma in Information Technology — TUT (Completed Nov 2025)
-📜 11+ Professional Certifications (Oracle, Azure, CCNA, Spring Boot, and more)`,
+• Advanced Diploma in Information Technology at Vaal University of Technology, in progress
+• Diploma in Information Technology at Vaal University of Technology, completed in 2025
+• Professional certificates in cloud, DevOps, networking and software development`,
   },
   whyHire: {
-    text: `Why hire Pitso?
+    text: `Why consider Pitso for a developer role?
 
-✓ Proven impact — 40% performance improvement, 10K+ user systems
-✓ 11+ certifications including Oracle DevOps & Azure Fundamentals
-✓ Full-stack expertise — Java, Spring Boot, React, Node.js
-✓ AI & ML knowledge — Python, scikit-learn, data analysis
-✓ Cloud certified — Oracle Cloud & Microsoft Azure
-✓ Currently pursuing Advanced Diploma in IT
-✓ Open to full-time roles, freelance, and collaborations`,
+• Strong Java and Spring Boot focus
+• Hands on full stack project experience
+• Experience with React, TypeScript and SQL
+• Cloud and DevOps certifications
+• Practical experience integrating AI services where they support a product need
+• Clear motivation to learn from an experienced development team
+• Open to Junior Software Developer, Java Developer and Full Stack opportunities`,
   },
   contact: {
     text: `You can reach Pitso through:
 
-📧 Email: pnkotolane@gmail.com
-📱 Phone: +27 63 865 4343
-💼 LinkedIn: linkedin.com/in/pitso-nkotolane
-🐙 GitHub: github.com/Pitso4859
-💬 WhatsApp: +27 79 050 4859
+• Email: pnkotolane@gmail.com
+• Phone: +27 63 865 4343
+• LinkedIn: linkedin.com/in/pitso-nkotolane
+• GitHub: github.com/Pitso4859
+• WhatsApp: +27 79 050 4859
 
-Or scroll down to book a call directly on this page!`,
+You can also use the booking section on this portfolio to schedule a call.`,
   },
   booking: {
     text: `To book a call with Pitso:
 
-1. Click the "Book a Call with Pitso" button below
-2. Choose a meeting type: Quick Call (15-30 min), Meeting (30-60 min), or Mentorship (60 min)
+1. Open the booking section
+2. Choose Quick Call, Meeting or Mentorship
 3. Pick a date and time
 4. Enter your name and email
-5. You'll receive a confirmation email right away!`,
+5. Submit the booking request`,
   },
-  resume: {
-    text: '📄 Here is Pitso\'s resume — click to download:',
-    files: [{ label: '📥 Download Resume / CV', url: FILES.resume }],
-  },
-  allCerts: {
-    text: '📜 Here are all of Pitso\'s 12 certificates — click any to download:',
-    files: ALL_CERTS.map(c => ({ label: `📥 ${c.label}`, url: c.url })),
-  },
-  certOracle:        { text: '📜 Oracle DevOps Professional Certificate:',           files: [{ label: '📥 Download Oracle DevOps Certificate',       url: FILES.oracle }] },
-  certAzure:         { text: '📜 Microsoft Azure Fundamentals Certificate:',          files: [{ label: '📥 Download Azure Fundamentals Certificate',  url: FILES.azure }] },
-  certSpringBoot:    { text: '📜 Spring Boot for Beginners Certificate:',             files: [{ label: '📥 Download Spring Boot Certificate',         url: FILES.springBoot }] },
-  certGit:           { text: '📜 Git & GitHub Fundamentals Certificate:',             files: [{ label: '📥 Download Git & GitHub Certificate',        url: FILES.git }] },
-  certJava:          { text: '📜 Java Object-Oriented Programming Certificate:',      files: [{ label: '📥 Download Java OOP Certificate',            url: FILES.java }] },
-  certCCNA:          { text: '📜 CCNA: Introduction to Networks Certificate:',        files: [{ label: '📥 Download CCNA Certificate',                url: FILES.ccna }] },
-  certHTML:          { text: '📜 HTML Essentials Certificate:',                        files: [{ label: '📥 Download HTML Essentials Certificate',     url: FILES.html }] },
-  certIBM:           { text: '📜 IBM Design Certificate:',                             files: [{ label: '📥 Download IBM Design Certificate',          url: FILES.ibm }] },
-  certCyber:         { text: '📜 Introduction to Cybersecurity Certificate:',         files: [{ label: '📥 Download Cybersecurity Certificate',        url: FILES.cybersecurity }] },
-  certJS:            { text: '📜 JavaScript Essentials 2 Certificate:',               files: [{ label: '📥 Download JavaScript Certificate',          url: FILES.javascript }] },
-  certNetworking:    { text: '📜 Networking Basics Certificate:',                     files: [{ label: '📥 Download Networking Basics Certificate',   url: FILES.networking }] },
-  certOS:            { text: '📜 Operating Systems Basics Certificate:',              files: [{ label: '📥 Download Operating Systems Certificate',   url: FILES.os }] },
+  resume: { text: 'Here is Pitso\'s CV. Use the button below to download it.', files: [{ label: 'Download CV', url: FILES.resume }] },
+  allCerts: { text: 'Here are Pitso\'s certificates. Select any certificate to download it.', files: ALL_CERTS.map(c => ({ label: c.label, url: c.url })) },
+  certOracle: { text: 'Oracle DevOps Professional Certificate', files: [{ label: 'Download Oracle DevOps Certificate', url: FILES.oracle }] },
+  certAzure: { text: 'Microsoft Azure Fundamentals Certificate', files: [{ label: 'Download Azure Fundamentals Certificate', url: FILES.azure }] },
+  certSpringBoot: { text: 'Spring Boot for Beginners Certificate', files: [{ label: 'Download Spring Boot Certificate', url: FILES.springBoot }] },
+  certGit: { text: 'Git and GitHub Fundamentals Certificate', files: [{ label: 'Download Git and GitHub Certificate', url: FILES.git }] },
+  certJava: { text: 'Java Object Oriented Programming Certificate', files: [{ label: 'Download Java OOP Certificate', url: FILES.java }] },
+  certCCNA: { text: 'CCNA Introduction to Networks Certificate', files: [{ label: 'Download CCNA Certificate', url: FILES.ccna }] },
+  certHTML: { text: 'HTML Essentials Certificate', files: [{ label: 'Download HTML Essentials Certificate', url: FILES.html }] },
+  certIBM: { text: 'IBM Design Certificate', files: [{ label: 'Download IBM Design Certificate', url: FILES.ibm }] },
+  certCyber: { text: 'Introduction to Cybersecurity Certificate', files: [{ label: 'Download Cybersecurity Certificate', url: FILES.cybersecurity }] },
+  certJS: { text: 'JavaScript Essentials 2 Certificate', files: [{ label: 'Download JavaScript Certificate', url: FILES.javascript }] },
+  certNetworking: { text: 'Networking Basics Certificate', files: [{ label: 'Download Networking Basics Certificate', url: FILES.networking }] },
+  certOS: { text: 'Operating Systems Basics Certificate', files: [{ label: 'Download Operating Systems Certificate', url: FILES.os }] },
   help: {
-    text: `I can help you with:
+    text: `I can help with:
 
-• Pitso's skills and technologies
+• Pitso's background and journey from Sephukubje Village
+• Skills and technologies
 • Professional experience
 • Featured projects
-• Education & certifications
-• Download resume / CV
-• Download any individual certificate
-• Why you should hire Pitso
+• Education and certificates
+• CV download
+• Individual certificate downloads
 • Contact information
-• How to book a call
-
-Just ask anything!`,
+• Booking a call`,
   },
 };
 
@@ -168,6 +176,14 @@ function getResponse(input: string): BotMessage {
 
   if (q.match(/^(hi|hello|hey|good morning|good afternoon|howzit)/)) return KNOWLEDGE.greeting;
   if (q.includes('help') || q === 'what can you do') return KNOWLEDGE.help;
+
+  //  Location / Origin keywords (new)
+  if (q.includes('village') || q.includes('sephukubje') || q.includes('sekgosese') || 
+      q.includes('limpopo') || q.includes('johannesburg') || q.includes('location') || 
+      q.includes('where') || q.includes('from') || q.includes('born') || q.includes('grew up') ||
+      q.includes('origin') || q.includes('hometown') || q.includes('background')) {
+    return KNOWLEDGE.location;
+  }
 
   // Resume / CV
   if (q.includes('resume') || q.includes('cv') || q.includes('curriculum')) return KNOWLEDGE.resume;
@@ -184,7 +200,7 @@ function getResponse(input: string): BotMessage {
     return KNOWLEDGE.allCerts;
   }
 
-  // Individual certificates — order matters (most specific first)
+  // Individual certificates , order matters (most specific first)
   if (q.includes('oracle') || q.includes('devops'))                  return KNOWLEDGE.certOracle;
   if (q.includes('azure') || (q.includes('microsoft') && q.includes('cert'))) return KNOWLEDGE.certAzure;
   if (q.includes('spring') || (q.includes('boot') && !q.includes('reboot'))) return KNOWLEDGE.certSpringBoot;
@@ -208,18 +224,20 @@ function getResponse(input: string): BotMessage {
   if (q.includes('book') || q.includes('call') || q.includes('meeting') || q.includes('schedule')) return KNOWLEDGE.booking;
 
   return {
-    text: "I'm not sure about that. Try asking about Pitso's skills, projects, experience, certifications, or how to book a call — I'm happy to help with any of those!",
+    text: "I'm not sure about that. Try asking about Pitso's background (where he's from), skills, projects, experience, certifications, or how to book a call , I'm happy to help with any of those!",
   };
 }
 
 // ── Suggestion chips ────────────────────────────────────────────────────────
+//  Updated suggestions to include location
 const SUGGESTIONS = [
+  "Where is Pitso from?",
   "What are Pitso's skills?",
   'Download his resume',
   'Show all certificates',
   'Tell me about his projects',
-  'How do I book a call?',
   'Why should I hire him?',
+  'How do I book a call?',
 ];
 
 // ── Download button component ───────────────────────────────────────────────
@@ -229,7 +247,7 @@ const DownloadButton = ({ label, url }: FileButton) => (
     download
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center gap-2 w-full rounded-lg border border-indigo-200 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors group"
+    className="flex items-center gap-2 w-full rounded-lg border border-[#bfdbfe] dark:border-[#1e3a5f] bg-[#eff6ff] dark:bg-[#0f1b2d] px-3 py-2 text-sm font-medium text-[#1d4ed8] dark:text-[#3b82f6] hover:bg-[#eff6ff] dark:hover:bg-[#13233a] transition-colors group"
   >
     <svg className="h-4 w-4 shrink-0 group-hover:translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -243,7 +261,7 @@ function renderBot(content: BotMessage | string) {
   const msg: BotMessage = typeof content === 'string' ? { text: content } : content;
   const lines = msg.text.split('\n');
 
-  const elements: React.ReactNode[] = [];
+  const elements: ReactNode[] = [];
   let listItems: string[] = [];
 
   const flush = (key: string) => {
@@ -252,7 +270,7 @@ function renderBot(content: BotMessage | string) {
         <ul key={key} className="mt-1 space-y-1 pl-1">
           {listItems.map((item, i) => (
             <li key={i} className="flex gap-2 text-sm leading-relaxed">
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400" />
+              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#2563eb]" />
               <span>{item}</span>
             </li>
           ))}
@@ -265,8 +283,8 @@ function renderBot(content: BotMessage | string) {
   lines.forEach((raw, i) => {
     const line = raw.trim();
     if (!line) { flush(`f${i}`); return; }
-    if (/^[•\-✓✗]\s/.test(line) || /^\d+\.\s/.test(line)) {
-      listItems.push(line.replace(/^[•\-✓✗]\s|^\d+\.\s/, ''));
+    if (/^[•\-]\s/.test(line) || /^\d+\.\s/.test(line)) {
+      listItems.push(line.replace(/^[•\-]\s|^\d+\.\s/, ''));
     } else {
       flush(`f${i}`);
       elements.push(<p key={i} className="text-sm leading-relaxed">{line}</p>);
@@ -346,7 +364,7 @@ const Chatbot = () => {
     }, 400);
   }, [isLoading, isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); sendMessage(input); };
+  const handleSubmit = (e: FormEvent) => { e.preventDefault(); sendMessage(input); };
 
   const clearChat = () => {
     setMessages([{ role: 'assistant', content: KNOWLEDGE.greeting, id: 'welcome' }]);
@@ -360,20 +378,19 @@ const Chatbot = () => {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
         {!isOpen && showHint && (
           <div
-            className="flex cursor-pointer items-center gap-2 rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 shadow-xl dark:border-zinc-700 dark:bg-zinc-800"
+            className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2.5 shadow-lg dark:border-zinc-700 dark:bg-zinc-800"
             onClick={() => setIsOpen(true)}
           >
             <span className="relative flex h-2 w-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#2563eb]" />
             </span>
             <span className="whitespace-nowrap text-xs font-medium text-zinc-700 dark:text-zinc-300">
-              Ask me about Pitso! 👋
+              Ask about Pitso
             </span>
             <button
               onClick={e => { e.stopPropagation(); setShowHint(false); }}
               className="ml-1 text-[11px] text-zinc-400 hover:text-zinc-600"
-            >✕</button>
+            >X</button>
           </div>
         )}
 
@@ -381,8 +398,8 @@ const Chatbot = () => {
           onClick={() => setIsOpen(o => !o)}
           className={cn(
             'relative flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg',
-            'bg-gradient-to-br from-indigo-600 to-purple-600',
-            'hover:scale-110 hover:shadow-indigo-500/40 transition-all duration-300',
+            'bg-[#172033] dark:bg-[#3b82f6] dark:text-white',
+            'hover:shadow-zinc-400/20 dark:hover:shadow-black/30 transition-shadow duration-200',
           )}
         >
           {hasUnread && !isOpen && (
@@ -404,23 +421,23 @@ const Chatbot = () => {
       <div
         className={cn(
           'fixed bottom-24 right-6 z-50 flex flex-col',
-          'w-[calc(100vw-3rem)] max-w-[380px]',
-          'rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700',
-          'bg-white dark:bg-zinc-900 shadow-2xl',
+          'w-[calc(100vw-3rem)] max-w-[380px] sm:max-w-[400px]',
+          'rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700',
+          'bg-white dark:bg-[#111722] shadow-xl',
           'transition-all duration-300 origin-bottom-right',
           isOpen ? 'scale-100 opacity-100 pointer-events-auto' : 'scale-90 opacity-0 pointer-events-none'
         )}
-        style={{ height: '580px' }}
+        style={{ height: 'min(580px, calc(100dvh - 7rem))', maxHeight: 'calc(100dvh - 7rem)' }}
       >
         {/* Header */}
-        <div className="flex shrink-0 items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3">
+        <div className="flex shrink-0 items-center gap-3 bg-[#172033] px-4 py-3 dark:bg-[#111827]">
           <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-bold text-white">
             P
-            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-400 ring-2 ring-indigo-600" />
+            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-400 ring-2 ring-[#172033]" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-white leading-tight">Pitso's Assistant</p>
-            <p className="text-[11px] text-indigo-200">Instant answers · Cert downloads · Online</p>
+            <p className="text-sm font-semibold text-white leading-tight">Portfolio Assistant</p>
+            <p className="text-[11px] text-zinc-300">Skills, projects and experience</p>
           </div>
           <button onClick={clearChat} title="New chat" className="rounded-lg p-1.5 text-white/60 hover:bg-white/20 hover:text-white transition-colors">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -439,12 +456,12 @@ const Chatbot = () => {
           {messages.map(msg => (
             <div key={msg.id} className={cn('flex gap-2', msg.role === 'user' ? 'justify-end' : 'justify-start')}>
               {msg.role === 'assistant' && (
-                <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-xs font-bold text-white">P</div>
+                <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#172033] text-xs font-bold text-white dark:bg-[#3b82f6] dark:text-white">P</div>
               )}
               <div className={cn(
                 'max-w-[85%] rounded-2xl px-3.5 py-2.5',
                 msg.role === 'user'
-                  ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-tr-sm text-sm leading-relaxed'
+                  ? 'bg-[#172033] text-white rounded-tr-sm text-sm leading-relaxed dark:bg-[#3b82f6] dark:text-white'
                   : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-tl-sm'
               )}>
                 {msg.role === 'user'
@@ -456,7 +473,7 @@ const Chatbot = () => {
 
           {isLoading && (
             <div className="flex gap-2">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-xs font-bold text-white">P</div>
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#172033] text-xs font-bold text-white dark:bg-[#3b82f6] dark:text-white">P</div>
               <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-sm bg-zinc-100 dark:bg-zinc-800 px-4 py-3">
                 {[0, 150, 300].map(d => <span key={d} className="h-2 w-2 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: `${d}ms` }} />)}
               </div>
@@ -469,7 +486,7 @@ const Chatbot = () => {
               <div className="flex flex-wrap gap-1.5">
                 {SUGGESTIONS.map(s => (
                   <button key={s} onClick={() => sendMessage(s)}
-                    className="rounded-full border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1.5 text-xs font-medium text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors">
+                    className="rounded-full border border-[#bfdbfe] dark:border-[#1e3a5f] bg-[#eff6ff] dark:bg-[#0f1b2d] px-3 py-1.5 text-xs font-medium text-[#1d4ed8] dark:text-[#3b82f6] hover:bg-[#eff6ff] dark:hover:bg-[#13233a] transition-colors">
                     {s}
                   </button>
                 ))}
@@ -484,9 +501,9 @@ const Chatbot = () => {
         <div className="shrink-0 px-4 pb-2">
           <button
             onClick={() => { setIsOpen(false); document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity"
+            className="w-full rounded-md bg-[#172033] py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f172a] dark:bg-[#3b82f6] dark:text-white dark:hover:bg-[#2563eb]"
           >
-            📅 Book a Call with Pitso
+            Book a Call with Pitso
           </button>
         </div>
 
@@ -498,10 +515,10 @@ const Chatbot = () => {
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              placeholder="Ask about skills, projects, certificates..."
+              placeholder="Ask about skills, projects or experience..."
               disabled={isLoading}
               maxLength={300}
-              className="flex-1 min-w-0 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3.5 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:opacity-50 transition-all"
+              className="flex-1 min-w-0 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3.5 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:border-transparent disabled:opacity-50 transition-all"
             />
             <button
               type="submit"
@@ -509,7 +526,7 @@ const Chatbot = () => {
               className={cn(
                 'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200',
                 input.trim() && !isLoading
-                  ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white hover:opacity-90 hover:scale-105'
+                  ? 'bg-[#172033] text-white hover:bg-[#0f172a] dark:bg-[#3b82f6] dark:text-white dark:hover:bg-[#2563eb]'
                   : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 cursor-not-allowed'
               )}
             >
@@ -518,7 +535,7 @@ const Chatbot = () => {
               </svg>
             </button>
           </form>
-          <p className="mt-1.5 text-center text-[10px] text-zinc-400 dark:text-zinc-600">Instant answers — no AI needed</p>
+          <p className="mt-1.5 text-center text-[10px] text-zinc-400 dark:text-zinc-600">Portfolio assistant for recruiters and visitors</p>
         </div>
       </div>
     </>

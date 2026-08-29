@@ -1,112 +1,77 @@
-// src/components/Skills.tsx
-import { motion } from 'framer-motion';
-import { 
-  FaJava, 
-  FaPython, 
-  FaCloud,
-  FaDocker,
-  FaGitAlt,
-  FaAws,
-  FaMicrosoft,
-} from 'react-icons/fa';
-import {
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNodedotjs,
-  SiSpringboot,
-  SiMysql,
-  SiPostgresql,
-  SiMongodb,
-  SiFirebase,
-} from 'react-icons/si';
-import { SkillPill, type SkillPillData } from './SkillPill';
-import { cn } from '../lib/utils';
+type Skill = { name: string; image: string };
+type SkillGroup = { title: string; description: string; skills: Skill[] };
 
-const skills: SkillPillData[] = [
-  { name: 'Java', role: 'Language', icon: FaJava, color: '#f89820' },
-  { name: 'Spring Boot', role: 'Framework', icon: SiSpringboot, color: '#6db33f' },
-  { name: 'JavaScript', role: 'Language', icon: SiJavascript, color: '#F7DF1E' },
-  { name: 'TypeScript', role: 'Language', icon: SiTypescript, color: '#3178C6' },
-  { name: 'React', role: 'Library', icon: SiReact, color: '#61DAFB' },
-  { name: 'Node.js', role: 'Runtime', icon: SiNodedotjs, color: '#339933' },
-  { name: 'Python', role: 'Language', icon: FaPython, color: '#3776AB' },
-  { name: 'MySQL', role: 'Database', icon: SiMysql, color: '#4479A1' },
-  { name: 'PostgreSQL', role: 'Database', icon: SiPostgresql, color: '#4169E1' },
-  { name: 'MongoDB', role: 'Database', icon: SiMongodb, color: '#47A248' },
-  { name: 'Firebase', role: 'BaaS', icon: SiFirebase, color: '#FFCA28' },
-  { name: 'Oracle Cloud', role: 'Cloud', icon: FaCloud, color: '#F80000' },
-  { name: 'Azure', role: 'Cloud', icon: FaMicrosoft, color: '#0078D4' },
-  { name: 'AWS', role: 'Cloud', icon: FaAws, color: '#FF9900' },
-  { name: 'Docker', role: 'Container', icon: FaDocker, color: '#2496ED' },
-  { name: 'Git', role: 'Version Control', icon: FaGitAlt, color: '#F05032' },
+const groups: SkillGroup[] = [
+  {
+    title: 'Backend development',
+    description: 'Application logic, APIs and data access.',
+    skills: [
+      { name: 'Java', image: '/icon-logo/java.png' },
+      { name: 'Spring Boot', image: '/icon-logo/spring-boot.png' },
+      { name: 'Node.js', image: '/icon-logo/nodejs.png' },
+      { name: 'REST APIs', image: '/icon-logo/rest-api.png' },
+    ],
+  },
+  {
+    title: 'Frontend development',
+    description: 'Responsive and maintainable web interfaces.',
+    skills: [
+      { name: 'React', image: '/icon-logo/react.png' },
+      { name: 'TypeScript', image: '/icon-logo/typescript.png' },
+      { name: 'JavaScript', image: '/icon-logo/javascript-alt.png' },
+      { name: 'HTML and CSS', image: '/icon-logo/html-css.png' },
+    ],
+  },
+  {
+    title: 'Data',
+    description: 'Relational and document data for application development.',
+    skills: [
+      { name: 'PostgreSQL', image: '/icon-logo/postgresql.png' },
+      { name: 'MySQL', image: '/icon-logo/mysql.png' },
+      { name: 'MongoDB', image: '/icon-logo/mongodb.png' },
+      { name: 'Firebase', image: '/icon-logo/firebase.png' },
+    ],
+  },
+  {
+    title: 'Tools and cloud',
+    description: 'Source control, deployment and supporting tools.',
+    skills: [
+      { name: 'Git', image: '/icon-logo/git.png' },
+      { name: 'Docker', image: '/icon-logo/docker.png' },
+      { name: 'Azure', image: '/icon-logo/azure.png' },
+      { name: 'Python', image: '/icon-logo/python.png' },
+    ],
+  },
 ];
 
-function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
-  const items = [...skills, ...skills];
-
-  return (
-    <div
-      className={cn(
-        'flex w-max gap-3 sm:gap-4',
-        reverse ? 'animate-marquee-reverse' : 'animate-marquee'
-      )}
-    >
-      {items.map((skill, i) => (
-        <SkillPill key={`${skill.name}-${i}`} skill={skill} />
-      ))}
+const Skills = () => (
+  <section id="skills" className="section-padding border-y border-[#e4e7eb] bg-[#f6f7f8] dark:border-[#252d39] dark:bg-[#0e141e]">
+    <div className="mx-auto w-full max-w-7xl">
+      <div className="max-w-2xl">
+        <p className="section-kicker">Technical skills</p>
+        <h2 className="section-title mt-2">A practical stack for full stack development.</h2>
+        <p className="section-copy mt-3">Java and Spring Boot are my strongest focus. I also work with modern frontend tools, databases, deployment workflows and Python when a project needs them.</p>
+      </div>
+      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {groups.map((group) => (
+          <article key={group.title} className="rounded-xl border border-[#e0e3e7] bg-white p-5 shadow-[0_6px_20px_rgba(15,23,42,0.04)] dark:border-[#2b3441] dark:bg-[#111722]">
+            <h3 className="text-base font-semibold text-[#172033] dark:text-white">{group.title}</h3>
+            <p className="mt-1.5 min-h-11 text-sm leading-6 text-[#6b7481] dark:text-zinc-400">{group.description}</p>
+            <ul className="mt-4 divide-y divide-[#eceef1] border-t border-[#eceef1] dark:divide-[#29323f] dark:border-[#29323f]">
+              {group.skills.map(({ name, image }) => (
+                <li key={name} className="flex items-center gap-3 py-2.5 text-sm font-medium text-[#374151] dark:text-zinc-200">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white p-1 ring-1 ring-[#e6e8eb] dark:bg-[#f8fafc] dark:ring-[#3a4350]">
+                    <img src={image} alt="" aria-hidden="true" className="h-full w-full object-contain" loading="lazy" />
+                  </span>
+                  {name}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
     </div>
-  );
-}
-
-const Skills = () => {
-  return (
-    <section id="skills" className="section-padding overflow-x-hidden">
-      <motion.div
-        className="mx-auto w-full min-w-0 max-w-7xl"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="mb-8 text-center md:text-left">
-          <p className="text-sm font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-500">
-            Tech Stack
-          </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950 dark:text-white sm:text-4xl">
-            Skills
-          </h2>
-          <p className="mt-3 max-w-xl text-zinc-600 dark:text-zinc-400">
-            Tools and frameworks I use to ship production-ready products.{' '}
-            <span className="hidden sm:inline">Hover a skill on desktop for details.</span>
-          </p>
-        </div>
-
-        <motion.div
-          className="marquee-pause relative touch-pan-y space-y-3 sm:space-y-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <div
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-white to-transparent dark:from-zinc-900 sm:w-16 md:w-24"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white to-transparent dark:from-zinc-900 sm:w-16 md:w-24"
-            aria-hidden
-          />
-
-          <div className="overflow-hidden py-2">
-            <MarqueeRow />
-          </div>
-          <div className="overflow-hidden py-2">
-            <MarqueeRow reverse />
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-};
+  </section>
+);
 
 export default Skills;

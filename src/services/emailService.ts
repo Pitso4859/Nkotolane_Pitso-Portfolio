@@ -1,6 +1,4 @@
 // src/services/emailService.ts
-import emailjs from '@emailjs/browser';
-
 const PUBLIC_KEY        = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const SERVICE_ID        = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const USER_TEMPLATE_ID  = import.meta.env.VITE_EMAILJS_BOOKING_TEMPLATE;
@@ -65,6 +63,7 @@ export async function sendBookingEmails(booking: BookingDetails): Promise<boolea
   };
 
   try {
+    const { default: emailjs } = await import('@emailjs/browser');
     emailjs.init(PUBLIC_KEY);
 
     const userResult  = await emailjs.send(SERVICE_ID, USER_TEMPLATE_ID,  userParams);
